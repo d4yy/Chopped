@@ -1,0 +1,13 @@
+{
+  "###TABS###":  "--------------------------------------",
+  "itemGroup.choppedTab": "Chopped",
+
+
+  "###ITEMS###": "--------------------------------------",
+  "item.chopped.chromium_ingot": "Chromium Ingot",
+  "item.chopped.raw_chromium": "Raw Chromium",
+
+  "###BLOCKS###": "--------------------------------------",
+  "block.chopped.chromium_ore": "Chromium Ore",
+  "block.chopped.deepslate_chromium_ore": "Deepslate Chromium Ore"
+}
