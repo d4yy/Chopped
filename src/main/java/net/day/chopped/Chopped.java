@@ -36,7 +36,7 @@ public class Chopped {
         // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ChoppedCommonConfig.SPEC, "sloshed-common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ChoppedCommonConfig.SPEC, "chopped-common.toml");
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
