@@ -3,9 +3,12 @@ package net.day.chopped.registry.groups;
 import net.day.chopped.Chopped;
 import net.day.chopped.blocks.ChoppedBlock;
 import net.day.chopped.blocks.ChoppedFallingBlock;
+import net.day.chopped.blocks.crops.ChoppedCropBlock;
+import net.day.chopped.items.ChoppedItem;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -57,6 +60,10 @@ public class ChoppedBlocks {
                     .strength(1.0F, 1.0F)
                     .sound(SoundType.SAND)
             )
+    );
+
+    public static final RegistryObject<Block> BLOCK_TEST_CROP_4 = register("test_crop", () ->
+            new ChoppedCropBlock(4, Items.IRON_INGOT)
     );
 
 
