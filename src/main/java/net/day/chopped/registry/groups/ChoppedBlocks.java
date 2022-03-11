@@ -5,9 +5,11 @@ import net.day.chopped.blocks.ChoppedBlock;
 import net.day.chopped.blocks.ChoppedFallingBlock;
 import net.day.chopped.blocks.crops.ChoppedCropBlock;
 import net.day.chopped.items.ChoppedItem;
+import net.day.chopped.items.ChoppedSeedItem;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.OreBlock;
@@ -62,11 +64,13 @@ public class ChoppedBlocks {
             )
     );
 
-    public static final RegistryObject<Block> BLOCK_TEST_CROP_4 = register("test_crop", () ->
-            new ChoppedCropBlock(4, Items.IRON_INGOT)
+    public static final RegistryObject<ChoppedCropBlock> BLOCK_TEST_CROP = registerSeedItem("test_crop", () ->
+            new ChoppedCropBlock(8, Items.IRON_INGOT), "test_crop_seeds"
     );
 
-
+    public static final RegistryObject<ChoppedCropBlock> BLOCK_TEST_CROP_2 = registerSeedItem("test_crop_2", () ->
+            new ChoppedCropBlock(2, Items.COAL), "test_crop_2_seeds"
+    );
 
     public static void register() {}
 
@@ -77,6 +81,12 @@ public class ChoppedBlocks {
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
         RegistryObject<T> ret = registerNoItem(name, block);
         ChoppedRegistry.ITEMS.register(name, () -> new BlockItem(ret.get(), new Item.Properties().tab(ChoppedTabs.CHOPPED_TAB)));
+        return ret;
+    }
+
+    private static <T extends Block> RegistryObject<T> registerSeedItem(String name, Supplier<T> block, String iName) {
+        RegistryObject<T> ret = registerNoItem(name, block);
+        ChoppedRegistry.ITEMS.register(iName, () -> new ChoppedSeedItem(ret.get()));
         return ret;
     }
 }

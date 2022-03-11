@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "age=0,section=stalkbase": {
+      "model": "minecraft:block/wheat_stage0"
+    },
+    "age=1,section=stalkbase": {
+      "model": "minecraft:block/wheat_stage1"
+    },
+    "age=2,section=stalkbase": {
+      "model": "minecraft:block/wheat_stage2"
+    },
+    "age=3,section=stalkbase": {
+      "model": "minecraft:block/wheat_stage3"
+    },
+    "age=4,section=stalkbase": {
+      "model": "minecraft:block/wheat_stage4"
+    },
+    "age=5,section=stalkbase": {
+      "model": "minecraft:block/wheat_stage5"
+    },
+    "age=6,section=stalkbase": {
+      "model": "minecraft:block/wheat_stage6"
+    },
+    "age=7,section=stalkbase": {
+      "model": "minecraft:block/wheat_stage7"
+    },
+    "age=0,section=stalk1": {
+      "model": "minecraft:block/wheat_stage0"
+    },
+    "age=1,section=stalk1": {
+      "model": "minecraft:block/wheat_stage1"
+    },
+    "age=2,section=stalk1": {
+      "model": "minecraft:block/wheat_stage2"
+    },
+    "age=3,section=stalk1": {
+      "model": "minecraft:block/wheat_stage3"
+    },
+    "age=4,section=stalk1": {
+      "model": "minecraft:block/wheat_stage4"
+    },
+    "age=5,section=stalk1": {
+      "model": "minecraft:block/wheat_stage5"
+    },
+    "age=6,section=stalk1": {
+      "model": "minecraft:block/wheat_stage6"
+    },
+    "age=7,section=stalk1": {
+      "model": "minecraft:block/wheat_stage7"
+    },
+    "age=0,section=stalk2": {
+      "model": "minecraft:block/wheat_stage0"
+    },
+    "age=1,section=stalk2": {
+      "model": "minecraft:block/wheat_stage1"
+    },
+    "age=2,section=stalk2": {
+      "model": "minecraft:block/wheat_stage2"
+    },
+    "age=3,section=stalk2": {
+      "model": "minecraft:block/wheat_stage3"
+    },
+    "age=4,section=stalk2": {
+      "model": "minecraft:block/wheat_stage4"
+    },
+    "age=5,section=stalk2": {
+      "model": "minecraft:block/wheat_stage5"
+    },
+    "age=6,section=stalk2": {
+      "model": "minecraft:block/wheat_stage6"
+    },
+    "age=7,section=stalk2": {
+      "model": "minecraft:block/wheat_stage7"
+    },
+    "age=0,section=top": {
+      "model": "minecraft:block/wheat_stage0"
+    },
+    "age=1,section=top": {
+      "model": "minecraft:block/wheat_stage1"
+    },
+    "age=2,section=top": {
+      "model": "minecraft:block/wheat_stage2"
+    },
+    "age=3,section=top": {
+      "model": "minecraft:block/wheat_stage3"
+    },
+    "age=4,section=top": {
+      "model": "minecraft:block/wheat_stage4"
+    },
+    "age=5,section=top": {
+      "model": "minecraft:block/wheat_stage5"
+    },
+    "age=6,section=top": {
+      "model": "minecraft:block/wheat_stage6"
+    },
+    "age=7,section=top": {
+      "model": "minecraft:block/wheat_stage7"
+    }
+  }
+}
