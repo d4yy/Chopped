@@ -1,11 +1,13 @@
 package net.day.chopped;
 
+import net.day.chopped.blocks.ChoppedBlock;
 import net.day.chopped.configs.ChoppedCommonConfig;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.day.chopped.registry.groups.ChoppedBlocks;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -63,5 +65,12 @@ public class Chopped {
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
 
+    }
+
+    @SubscribeEvent
+    public void blockPlaceEvent(final BlockEvent.EntityPlaceEvent event) { //force send a tick to new chromium block
+        if (event.getPlacedBlock().is(ChoppedBlocks.BLOCKS_CHROMIUM_BLOCK.get())) {
+            event.getWorld().scheduleTick(event.getPos(), ChoppedBlocks.BLOCKS_CHROMIUM_BLOCK.get(), 4);
+        }
     }
 }
