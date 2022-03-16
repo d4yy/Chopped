@@ -5,10 +5,9 @@ import net.day.chopped.blocks.ChoppedBlock;
 import net.day.chopped.blocks.ChoppedFallingBlock;
 import net.day.chopped.blocks.crops.ChoppedCropBlock;
 import net.day.chopped.blocks.materials.ChromiumBlock;
-import net.day.chopped.blocks.materials.PrismBlock;
+import net.day.chopped.items.ChoppedBlockItem;
 import net.day.chopped.items.ChoppedSeedItem;
 import net.day.chopped.registry.ChoppedRegistry;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -58,14 +57,6 @@ public class ChoppedBlocks {
             )
     );
 
-    /*public static final RegistryObject<Block> BLOCKS_PRISM = register("prism", () ->
-            new PrismBlock(BlockBehaviour.Properties.of(Material.GLASS)
-                    .strength(2.0F, 1.0F)
-                    .sound(SoundType.GLASS)
-                    .noOcclusion()
-            )
-    );*/
-
 
 
     //SALT
@@ -109,7 +100,7 @@ public class ChoppedBlocks {
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
         RegistryObject<T> ret = registerNoItem(name, block);
-        ChoppedRegistry.ITEMS.register(name, () -> new BlockItem(ret.get(), new Item.Properties().tab(ChoppedTabs.CHOPPED_TAB)));
+        ChoppedRegistry.ITEMS.register(name, () -> new ChoppedBlockItem(ret.get(), new Item.Properties().tab(ChoppedTabs.CHOPPED_TAB)));
         return ret;
     }
 

@@ -7,7 +7,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -37,15 +36,15 @@ public class ChromiumBlock extends ChoppedBlock {
         BlockPos p = null;
 
         for (Direction direction : Direction.Plane.HORIZONTAL) {
-            if (level.getBrightness(LightLayer.SKY, pos.relative(direction)) - level.getSkyDarken() >= l) {
-                l = level.getBrightness(LightLayer.SKY, pos.relative(direction)) - level.getSkyDarken();
+            if (level.getRawBrightness(pos.relative(direction), level.getSkyDarken()) >= l && (level.isEmptyBlock(pos.relative(direction)) || !level.getBlockState(pos.relative(direction)).canOcclude())) {
+                l = level.getRawBrightness(pos.relative(direction), level.getSkyDarken());
                 p = pos.relative(direction);
             }
         }
 
         for (Direction direction : Direction.Plane.VERTICAL) {
-            if (level.getBrightness(LightLayer.SKY, pos.relative(direction)) - level.getSkyDarken() >= l) {
-                l = level.getBrightness(LightLayer.SKY, pos.relative(direction)) - level.getSkyDarken();
+            if (level.getRawBrightness(pos.relative(direction), level.getSkyDarken()) >= l && (level.isEmptyBlock(pos.relative(direction)) || !level.getBlockState(pos.relative(direction)).canOcclude())) {
+                l = level.getRawBrightness(pos.relative(direction), level.getSkyDarken());
                 p = pos.relative(direction);
             }
         }
@@ -60,12 +59,12 @@ public class ChromiumBlock extends ChoppedBlock {
         int lightOut;
 
         if (lightInPos != null) { //
-            lightIn = pLevel.getBrightness(LightLayer.SKY, lightInPos) - pLevel.getSkyDarken();
+            lightIn = pLevel.getRawBrightness(lightInPos, pLevel.getSkyDarken());
         } else {
             lightIn = 0;
         }
 
-        lightOut = Math.min((int) (lightIn * 1.5), 15);
+        lightOut = Math.min(lightIn, 15);
 
         pLevel.setBlock(pPos, pState.setValue(REFLECTIVE, Boolean.valueOf(lightIn > 0)).setValue(BLOCK_LIGHT_ABSORPTION, lightIn).setValue(BLOCK_LIGHT_EMISSION, lightOut), 3);
 
@@ -73,7 +72,7 @@ public class ChromiumBlock extends ChoppedBlock {
     }
 
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRand) {
-        Boolean r = (Math.random() <= 0.25) ? true : false;
+        Boolean r = Math.random() <= (pState.getValue(BLOCK_LIGHT_EMISSION)/15.0);
 
         if (pState.getValue(REFLECTIVE) && r) {
             spawnParticles(pLevel, pPos);
@@ -81,7 +80,6 @@ public class ChromiumBlock extends ChoppedBlock {
     }
 
     private static void spawnParticles(Level pLevel, BlockPos pPos) {
-        double d0 = 0.5625D;
         Random random = pLevel.random;
 
         for(Direction direction : Direction.values()) {

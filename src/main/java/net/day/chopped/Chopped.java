@@ -1,6 +1,5 @@
 package net.day.chopped;
 
-import net.day.chopped.blocks.ChoppedBlock;
 import net.day.chopped.configs.ChoppedCommonConfig;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.day.chopped.registry.groups.ChoppedBlocks;

@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class ChoppedBlockStateProperties extends BlockStateProperties {
     public static final BooleanProperty REFLECTIVE = BooleanProperty.create("reflective");
-    public static final BooleanProperty REFRACTIVE = BooleanProperty.create("refractive");
 
     public static final EnumProperty<CropSectionProperty> CROP_SECTION = EnumProperty.create("section", CropSectionProperty.class);
 
