@@ -63,7 +63,15 @@ public class ChoppedBlocks {
     public static final RegistryObject<Block> BLOCKS_STAINLESS_STEEL_BLOCK = register("stainless_steel_block", () ->
             new ChoppedBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .requiresCorrectToolForDrops()
-                    .strength(4.0F, 5.0F)
+                    .strength(4.0F, 300.0F)
+                    .sound(SoundType.COPPER)
+            )
+    );
+
+    public static final RegistryObject<Block> BLOCKS_DAMASCUS_STEEL_BLOCK = register("damascus_steel_block", () ->
+            new ChoppedBlock(BlockBehaviour.Properties.of(Material.METAL)
+                    .requiresCorrectToolForDrops()
+                    .strength(10.0F, 600.0F)
                     .sound(SoundType.NETHERITE_BLOCK)
             )
     );

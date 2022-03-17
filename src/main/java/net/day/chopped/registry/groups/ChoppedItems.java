@@ -13,7 +13,9 @@ public class ChoppedItems {
     public static final RegistryObject<Item> ITEMS_RAW_CHROMIUM = ChoppedRegistry.ITEMS.register("raw_chromium", ChoppedItem::new);
     public static final RegistryObject<Item> ITEMS_CHROMIUM_INGOT = ChoppedRegistry.ITEMS.register("chromium_ingot", ChoppedItem::new);
 
+    public static final RegistryObject<Item> ITEMS_SLAG = ChoppedRegistry.ITEMS.register("slag", ChoppedItem::new);
     public static final RegistryObject<Item> ITEMS_STAINLESS_STEEL_INGOT = ChoppedRegistry.ITEMS.register("stainless_steel_ingot", ChoppedItem::new);
+    public static final RegistryObject<Item> ITEMS_DAMASCUS_STEEL_INGOT = ChoppedRegistry.ITEMS.register("damascus_steel_ingot", ChoppedItem::new);
 
     public static final RegistryObject<Item> ITEMS_TOMATO = ChoppedRegistry.ITEMS.register("tomato", ChoppedItem::new);
     public static final RegistryObject<Item> ITEMS_TOMATO_SEEDS = ChoppedRegistry.ITEMS.register("tomato_seeds", () -> new ChoppedSeedItem(ChoppedBlocks.BLOCK_TOMATO_CROP.get()));
