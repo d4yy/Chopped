@@ -21,7 +21,6 @@ import java.util.Random;
 
 public class ChoppedCropBlock extends CropBlock {
     private final int MAX_CROP_HEIGHT;
-    private final ItemLike SEED_ITEM;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
     public static final EnumProperty<CropSectionProperty> SECTION = ChoppedBlockStateProperties.CROP_SECTION;
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
@@ -36,11 +35,10 @@ public class ChoppedCropBlock extends CropBlock {
     };
 
 
-    public ChoppedCropBlock(int height, ItemLike seed) {
+    public ChoppedCropBlock(int height) {
         super(BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
         this.registerDefaultState(this.stateDefinition.any().setValue(SECTION, CropSectionProperty.STALKBASE).setValue(AGE, Integer.valueOf(0)));
         this.MAX_CROP_HEIGHT = height;
-        this.SEED_ITEM = seed;
     }
 
     @Override
@@ -51,7 +49,7 @@ public class ChoppedCropBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return SEED_ITEM;
+        return this.asItem();
     }
 
     @Override
@@ -134,7 +132,7 @@ public class ChoppedCropBlock extends CropBlock {
         for (y = 0; pLevel.getBlockState(pPos.above(y)).is(this); ++y) {
         } //get # above
 
-        return (i < MAX_CROP_HEIGHT && !isMaxAge(pState)) || pLevel.getBlockState(pPos.above()).is(this) && ((((y - 1) + i) < MAX_CROP_HEIGHT) || !isMaxAge(pLevel.getBlockState(pPos.above(y - 1))));
+        return (i <= MAX_CROP_HEIGHT && !isMaxAge(pState)) || pLevel.getBlockState(pPos.above()).is(this) && ((((y - 1) + i) < MAX_CROP_HEIGHT) || !isMaxAge(pLevel.getBlockState(pPos.above(y - 1))));
     }
 
     @Override

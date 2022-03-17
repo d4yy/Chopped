@@ -10,6 +10,8 @@
   "###BLOCKS###": "--------------------------------------",
   "block.chopped.chromium_ore": "Chromium Ore",
   "block.chopped.deepslate_chromium_ore": "Deepslate Chromium Ore",
-  "block.chopped.chromium_block": "Chromium Block",
-  "block.chopped.chromium_block.tooltip" : "\u00A77Can be used as a beacon base"
+  "block.chopped.chromium_block": "Block of Chromium",
+  "block.chopped.chromium_block.tooltip": "\u00A77Can be used as a beacon base",
+  "block.chopped.sea_salt_block": "Block of Sea Salt",
+  "block.chopped.himalayan_salt_block": "Block of Himalayan Salt"
 }

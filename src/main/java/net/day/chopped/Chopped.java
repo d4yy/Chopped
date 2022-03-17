@@ -44,7 +44,7 @@ public class Chopped {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ItemBlockRenderTypes.setRenderLayer(ChoppedBlocks.BLOCK_TEST_CROP.get(), RenderType.cutoutMipped());
+            ItemBlockRenderTypes.setRenderLayer(ChoppedBlocks.BLOCK_TOMATO_CROP.get(), RenderType.cutoutMipped());
         });
     }
 
