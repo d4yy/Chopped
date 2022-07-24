@@ -3,7 +3,6 @@ package net.day.chopped.items;
 import net.day.chopped.registry.groups.ChoppedTabs;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +24,7 @@ public class ChoppedItem extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (I18n.exists(getDescriptionId(pStack) + ".tooltip")) {
-            pTooltipComponents.add(new TranslatableComponent(getDescriptionId(pStack) + ".tooltip"));
+            pTooltipComponents.add(Component.translatable(getDescriptionId(pStack) + ".tooltip"));
         }
     }
 }

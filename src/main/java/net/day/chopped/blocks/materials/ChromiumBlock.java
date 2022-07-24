@@ -2,18 +2,26 @@ package net.day.chopped.blocks.materials;
 
 import net.day.chopped.blocks.ChoppedBlock;
 import net.day.chopped.blocks.ChoppedBlockStateProperties;
+import net.day.chopped.registry.groups.ChoppedBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-
-import java.util.Random;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class ChromiumBlock extends ChoppedBlock {
     public static final BooleanProperty REFLECTIVE = ChoppedBlockStateProperties.REFLECTIVE;
@@ -25,6 +33,7 @@ public class ChromiumBlock extends ChoppedBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(REFLECTIVE, Boolean.valueOf(false)).setValue(BLOCK_LIGHT_ABSORPTION, Integer.valueOf(0)).setValue(BLOCK_LIGHT_EMISSION, Integer.valueOf(0)));
     }
 
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(REFLECTIVE);
         pBuilder.add(BLOCK_LIGHT_ABSORPTION);
@@ -53,7 +62,8 @@ public class ChromiumBlock extends ChoppedBlock {
     }
 
     @SuppressWarnings("deprecation")
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRand) {
+    @Override
+    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRand) {
         BlockPos lightInPos = getReflectionSourcePos(pState, pLevel, pPos);
         int lightIn;
         int lightOut;
@@ -71,7 +81,8 @@ public class ChromiumBlock extends ChoppedBlock {
         pLevel.scheduleTick(pPos, this, 4);
     }
 
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRand) {
+    @Override
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRand) {
         Boolean r = Math.random() <= (pState.getValue(BLOCK_LIGHT_EMISSION)/15.0);
 
         if (pState.getValue(REFLECTIVE) && r) {
@@ -80,7 +91,7 @@ public class ChromiumBlock extends ChoppedBlock {
     }
 
     private static void spawnParticles(Level pLevel, BlockPos pPos) {
-        Random random = pLevel.random;
+        RandomSource random = pLevel.random;
 
         for(Direction direction : Direction.values()) {
             BlockPos blockpos = pPos.relative(direction);
@@ -93,5 +104,21 @@ public class ChromiumBlock extends ChoppedBlock {
             }
         }
 
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        ItemStack item = pPlayer.getItemInHand(pHand);
+
+        if(item.is(Items.AMETHYST_SHARD)) {
+            if (pLevel.isClientSide) pLevel.playSound(pPlayer, pPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 2, 1);
+            pLevel.setBlock(pPos, ChoppedBlocks.BLOCKS_TINTED_CHROMIUM_BLOCK.get().defaultBlockState(), 3);
+            item.shrink(1);
+
+            return InteractionResult.sidedSuccess(pLevel.isClientSide);
+        }
+
+        return InteractionResult.PASS;
     }
 }

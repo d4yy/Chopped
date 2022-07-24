@@ -5,6 +5,7 @@ import net.day.chopped.blocks.ChoppedBlockStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -16,8 +17,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.Random;
 
 public class ChoppedCropBlock extends CropBlock {
     private final int MAX_CROP_HEIGHT;
@@ -59,7 +58,7 @@ public class ChoppedCropBlock extends CropBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
+    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
         if (!pLevel.isAreaLoaded(pPos, 1)) return;
 
         if (pLevel.getRawBrightness(pPos, 0) >= 9) {
@@ -119,7 +118,7 @@ public class ChoppedCropBlock extends CropBlock {
     }
 
     @Override
-    public boolean isBonemealSuccess(Level pLevel, Random pRandom, BlockPos pPos, BlockState pState) {
+    public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
         return true;
     }
 
@@ -136,7 +135,7 @@ public class ChoppedCropBlock extends CropBlock {
     }
 
     @Override
-    public void performBonemeal(ServerLevel pLevel, Random pRandom, BlockPos pPos, BlockState pState) {
+    public void performBonemeal(ServerLevel pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
         int i;
         int y;
         for(i = 1; pLevel.getBlockState(pPos.below(i)).is(this); ++i) {

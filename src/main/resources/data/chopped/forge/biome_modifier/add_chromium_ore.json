@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_dry/overworld",
+  "features": "chopped:chromium_ore_placed",
+  "step": "underground_ores"
+}

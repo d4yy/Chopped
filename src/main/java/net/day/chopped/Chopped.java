@@ -6,7 +6,7 @@ import net.day.chopped.registry.groups.ChoppedBlocks;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -43,9 +43,7 @@ public class Chopped {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            ItemBlockRenderTypes.setRenderLayer(ChoppedBlocks.BLOCK_TOMATO_CROP.get(), RenderType.cutoutMipped());
-        });
+
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -69,7 +67,7 @@ public class Chopped {
     @SubscribeEvent
     public void blockPlaceEvent(final BlockEvent.EntityPlaceEvent event) { //force send a tick to new chromium block
         if (event.getPlacedBlock().is(ChoppedBlocks.BLOCKS_CHROMIUM_BLOCK.get())) {
-            event.getWorld().scheduleTick(event.getPos(), ChoppedBlocks.BLOCKS_CHROMIUM_BLOCK.get(), 4);
+            event.getLevel().scheduleTick(event.getPos(), ChoppedBlocks.BLOCKS_CHROMIUM_BLOCK.get(), 4);
         }
     }
 }

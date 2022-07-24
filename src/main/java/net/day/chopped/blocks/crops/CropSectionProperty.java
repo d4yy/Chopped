@@ -1,6 +1,7 @@
 package net.day.chopped.blocks.crops;
 
 import net.minecraft.util.StringRepresentable;
+import org.jetbrains.annotations.NotNull;
 
 public enum CropSectionProperty implements StringRepresentable {
     STALKBASE("stalkbase"),
@@ -10,10 +11,11 @@ public enum CropSectionProperty implements StringRepresentable {
 
     private final String name;
 
-    private CropSectionProperty(String name) {
+    CropSectionProperty(String name) {
         this.name = name;
     }
 
+    @NotNull
     public String getSerializedName() {
         return this.name;
     }

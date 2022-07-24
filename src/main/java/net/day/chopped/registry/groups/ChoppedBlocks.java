@@ -10,7 +10,7 @@ import net.day.chopped.items.ChoppedSeedItem;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -28,14 +28,14 @@ public class ChoppedBlocks {
     //CHROMIUM
 
     public static final RegistryObject<Block> BLOCKS_CHROMIUM_ORE = register("chromium_ore", () ->
-            new OreBlock(BlockBehaviour.Properties.of(Material.STONE)
+            new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .requiresCorrectToolForDrops()
                     .strength(6.0F, 6.0F)
             )
     );
 
     public static final RegistryObject<Block> BLOCKS_DEEPSLATE_CHROMIUM_ORE = register("deepslate_chromium_ore", () ->
-            new OreBlock(BlockBehaviour.Properties.copy(BLOCKS_CHROMIUM_ORE.get())
+            new DropExperienceBlock(BlockBehaviour.Properties.copy(BLOCKS_CHROMIUM_ORE.get())
                     .color(MaterialColor.DEEPSLATE)
                     .strength(8.5F, 6.0F)
                     .sound(SoundType.DEEPSLATE)
@@ -53,6 +53,12 @@ public class ChoppedBlocks {
                     .strength(10.0F, 600.0F)
                     .sound(SoundType.METAL)
                     .lightLevel(s -> s.getValue(BLOCK_LIGHT_EMISSION))
+            )
+    );
+
+    public static final RegistryObject<Block> BLOCKS_TINTED_CHROMIUM_BLOCK = register("tinted_chromium_block", () ->
+            new ChoppedBlock(BlockBehaviour.Properties.copy(BLOCKS_CHROMIUM_BLOCK.get())
+                    .lightLevel(s -> 0)
             )
     );
 
@@ -116,6 +122,10 @@ public class ChoppedBlocks {
     );
     public static final RegistryObject<Block> BLOCK_ONION_CROP = registerNoItem("onion_crop", () ->
             new ChoppedCropBlock(1)
+    );
+
+    public static final RegistryObject<Block> BLOCK_GIANT_BEANSTALK = registerNoItem("giant_beanstalk_crop", () ->
+            new ChoppedCropBlock(20)
     );
 
 
