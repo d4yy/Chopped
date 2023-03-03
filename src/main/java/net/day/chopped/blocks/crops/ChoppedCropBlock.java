@@ -123,7 +123,7 @@ public class ChoppedCropBlock extends CropBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
+    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
         int i;
         int y;
         for(i = 1; pLevel.getBlockState(pPos.below(i)).is(this); ++i) {

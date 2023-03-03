@@ -18,7 +18,7 @@ public class ChoppedItem extends Item {
     }
 
     public ChoppedItem(Item.Properties properties) {
-        super(properties.tab(ChoppedTabs.CHOPPED_TAB));
+        super(properties);
     }
 
     @Override

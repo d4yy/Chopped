@@ -4,6 +4,7 @@ import net.day.chopped.Chopped;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ChoppedSounds {
@@ -14,7 +15,7 @@ public class ChoppedSounds {
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         ResourceLocation id = new ResourceLocation(Chopped.MOD_ID, name);
-        return ChoppedRegistry.SOUND_EVENTS.register(name, () -> new SoundEvent(id));
+        return ChoppedRegistry.SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
     }
 
 }

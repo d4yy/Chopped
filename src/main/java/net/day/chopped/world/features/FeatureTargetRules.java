@@ -3,7 +3,7 @@ package net.day.chopped.world.features;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import net.day.chopped.registry.groups.ChoppedBlocks;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -36,7 +36,7 @@ public class FeatureTargetRules {
 
 
         public static RuleTest getTargetRuleFromBlockTag(String tagResourceLocation) {
-            TagKey<Block> tag = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(tagResourceLocation));
+            TagKey<Block> tag = TagKey.create(Registries.BLOCK, new ResourceLocation(tagResourceLocation));
             return new TagMatchTest(tag);
         }
     }

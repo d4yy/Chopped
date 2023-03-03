@@ -1,6 +1,6 @@
 {
   "###TABS###":  "--------------------------------------",
-  "itemGroup.choppedTab": "Chopped",
+  "tabs.chopped.main_tab": "Chopped",
 
 
   "###ITEMS###": "--------------------------------------",
@@ -12,6 +12,8 @@
   "block.chopped.deepslate_chromium_ore": "Deepslate Chromium Ore",
   "block.chopped.chromium_block": "Block of Chromium",
   "block.chopped.chromium_block.tooltip": "\u00A77Can be used as a beacon base",
+  "block.chopped.tinted_chromium_block": "Tinted Block of Chromium",
+  "block.chopped.stainless_steel_block": "Block of Stainless Steel",
   "block.chopped.sea_salt_block": "Block of Sea Salt",
   "block.chopped.himalayan_salt_block": "Block of Himalayan Salt"
 }

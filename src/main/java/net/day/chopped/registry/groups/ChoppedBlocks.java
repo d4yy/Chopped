@@ -62,10 +62,6 @@ public class ChoppedBlocks {
             )
     );
 
-
-
-
-
     public static final RegistryObject<Block> BLOCKS_STAINLESS_STEEL_BLOCK = register("stainless_steel_block", () ->
             new ChoppedBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .requiresCorrectToolForDrops()
@@ -90,6 +86,7 @@ public class ChoppedBlocks {
             new ChoppedBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .requiresCorrectToolForDrops()
                     .strength(2.0F, 1.0F)
+                    .noLootTable()
             )
     );
 
@@ -113,20 +110,20 @@ public class ChoppedBlocks {
 
     //CROPS
 
-    public static final RegistryObject<Block> BLOCK_TOMATO_CROP = registerNoItem("tomato_crop", () ->
+    public static final RegistryObject<Block> BLOCKS_TOMATO_CROP = registerNoItem("tomato_crop", () ->
             new ChoppedCropBlock(2)
     );
 
-    public static final RegistryObject<Block> BLOCK_CORN_CROP = registerNoItem("corn_crop", () ->
+    public static final RegistryObject<Block> BLOCKS_CORN_CROP = registerNoItem("corn_crop", () ->
             new ChoppedCropBlock(2)
     );
-    public static final RegistryObject<Block> BLOCK_ONION_CROP = registerNoItem("onion_crop", () ->
+    public static final RegistryObject<Block> BLOCKS_ONION_CROP = registerNoItem("onion_crop", () ->
             new ChoppedCropBlock(1)
     );
 
-    public static final RegistryObject<Block> BLOCK_GIANT_BEANSTALK = registerNoItem("giant_beanstalk_crop", () ->
+    /*public static final RegistryObject<Block> BLOCKS_GIANT_BEANSTALK = registerNoItem("giant_beanstalk_crop", () ->
             new ChoppedCropBlock(20)
-    );
+    );*/
 
 
 
@@ -140,7 +137,7 @@ public class ChoppedBlocks {
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
         RegistryObject<T> ret = registerNoItem(name, block);
-        ChoppedRegistry.ITEMS.register(name, () -> new ChoppedBlockItem(ret.get(), new Item.Properties().tab(ChoppedTabs.CHOPPED_TAB)));
+        ChoppedRegistry.ITEMS.register(name, () -> new ChoppedBlockItem(ret.get(), new Item.Properties()));
         return ret;
     }
 

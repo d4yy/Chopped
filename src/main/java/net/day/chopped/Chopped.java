@@ -3,6 +3,7 @@ package net.day.chopped;
 import net.day.chopped.configs.ChoppedCommonConfig;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.day.chopped.registry.groups.ChoppedBlocks;
+import net.day.chopped.registry.groups.ChoppedTabs;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,6 +37,8 @@ public class Chopped {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ChoppedCommonConfig.SPEC, "chopped-common.toml");
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ChoppedTabs::registerTabs);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

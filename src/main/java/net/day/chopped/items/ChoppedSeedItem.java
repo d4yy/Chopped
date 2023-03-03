@@ -17,7 +17,7 @@ public class ChoppedSeedItem extends ItemNameBlockItem {
     }
 
     public ChoppedSeedItem(Block block, Properties properties) {
-        super(block, properties.tab(ChoppedTabs.CHOPPED_TAB));
+        super(block, properties);
     }
 
     @Override
