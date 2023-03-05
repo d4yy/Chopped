@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "chopped:applewood_log",
+    "chopped:applewood",
+    "chopped:stripped_applewood_log",
+    "chopped:stripped_applewood"
+  ]
+}

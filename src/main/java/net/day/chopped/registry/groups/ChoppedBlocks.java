@@ -3,16 +3,22 @@ package net.day.chopped.registry.groups;
 import net.day.chopped.Chopped;
 import net.day.chopped.blocks.ChoppedBlock;
 import net.day.chopped.blocks.ChoppedFallingBlock;
+import net.day.chopped.blocks.ChoppedFlammableRotatedPillarBlock;
 import net.day.chopped.blocks.crops.ChoppedCropBlock;
+import net.day.chopped.blocks.crops.FruitBearingLeavesBlock;
 import net.day.chopped.blocks.materials.ChromiumBlock;
 import net.day.chopped.items.ChoppedBlockItem;
 import net.day.chopped.items.ChoppedSeedItem;
 import net.day.chopped.registry.ChoppedRegistry;
+import net.day.chopped.world.features.tree_growers.AppleTreeGrower;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.common.Mod;
@@ -124,6 +130,61 @@ public class ChoppedBlocks {
     /*public static final RegistryObject<Block> BLOCKS_GIANT_BEANSTALK = registerNoItem("giant_beanstalk_crop", () ->
             new ChoppedCropBlock(20)
     );*/
+
+    public static  final  RegistryObject<Block> BLOCKS_APPLEWOOD_LOG = register("applewood_log", () ->
+            new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)
+                    .strength(5.0F)
+                    .requiresCorrectToolForDrops()
+            )
+    );
+    public static  final  RegistryObject<Block> BLOCKS_APPLEWOOD = register("applewood", () ->
+            new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)
+                    .strength(5.0F)
+                    .requiresCorrectToolForDrops()
+            )
+    );
+    public static  final  RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD_LOG = register("stripped_applewood_log", () ->
+            new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)
+                    .strength(5.0F)
+                    .requiresCorrectToolForDrops()
+            )
+    );
+    public static  final  RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD = register("stripped_applewood", () ->
+            new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)
+                    .strength(5.0F)
+                    .requiresCorrectToolForDrops()
+            )
+    );
+
+    public static  final  RegistryObject<Block> BLOCKS_APPLEWOOD_PLANKS = register("applewood_planks", () ->
+            new ChoppedBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)
+                    .strength(5.0F)
+            )
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+            }
+    );
+
+    public static final RegistryObject<Block> BLOCKS_APPLE_SAPLING = register("apple_sapling", () ->
+            new SaplingBlock(new AppleTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING))
+    );
+
+    public static final RegistryObject<Block> BLOCKS_APPLE_LEAVES = register("apple_leaves", () ->
+            new FruitBearingLeavesBlock(Items.APPLE)
+    );
 
 
 

@@ -2,10 +2,13 @@ package net.day.chopped.world.features;
 
 import net.day.chopped.Chopped;
 
+import net.day.chopped.registry.groups.ChoppedBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -21,6 +24,8 @@ public class ChoppedPlacedFeatures {
     public static final ResourceKey<PlacedFeature> HIMALAYAN_SALT_ORE_PLACED_KEY = registerKey("himalayan_salt_ore_placed");
 
     public static final ResourceKey<PlacedFeature> SEA_SALT_DEPOSIT_PLACED_KEY = registerKey("sea_salt_deposit_placed");
+
+    public static final ResourceKey<PlacedFeature> APPLE_TREE_PLACED_KEY = registerKey("apple_tree_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -44,6 +49,11 @@ public class ChoppedPlacedFeatures {
                 InSquarePlacement.spread(),
                 CountPlacement.of(2)
         ));
+
+        register(context, APPLE_TREE_PLACED_KEY, configuredFeatures.getOrThrow(ChoppedConfiguredFeatures.APPLE_TREE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05F, 1), ChoppedBlocks.BLOCKS_APPLE_SAPLING.get())
+        );
+
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {

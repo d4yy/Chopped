@@ -22,7 +22,13 @@
                     "age": "7",
                     "section": "stalkbase"
                   }
-                },
+                }
+              ],
+              "name": "chopped:corn"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
                 {
                   "block": "chopped:corn_crop",
                   "condition": "minecraft:block_state_property",
@@ -50,16 +56,7 @@
           "block": "chopped:corn_crop",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "7",
-            "section": "stalkbase"
-          }
-        },
-        {
-          "block": "chopped:corn_crop",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "age": "7",
-            "section": "top"
+            "age": "7"
           }
         }
       ],

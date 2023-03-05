@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "chopped:block/apple_leaves_bearing_alt"
+  }
+}
