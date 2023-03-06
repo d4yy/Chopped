@@ -34,163 +34,160 @@ public class ChoppedBlocks {
     //CHROMIUM
 
     public static final RegistryObject<Block> BLOCKS_CHROMIUM_ORE = register("chromium_ore", () ->
-            new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
-                    .requiresCorrectToolForDrops()
-                    .strength(6.0F, 6.0F)
-            )
+        new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(6.0F, 6.0F)
+        )
     );
 
     public static final RegistryObject<Block> BLOCKS_DEEPSLATE_CHROMIUM_ORE = register("deepslate_chromium_ore", () ->
-            new DropExperienceBlock(BlockBehaviour.Properties.copy(BLOCKS_CHROMIUM_ORE.get())
-                    .color(MaterialColor.DEEPSLATE)
-                    .strength(8.5F, 6.0F)
-                    .sound(SoundType.DEEPSLATE)
-            )
+        new DropExperienceBlock(BlockBehaviour.Properties.copy(BLOCKS_CHROMIUM_ORE.get())
+            .color(MaterialColor.DEEPSLATE)
+            .strength(8.5F, 6.0F)
+            .sound(SoundType.DEEPSLATE)
+        )
     );
 
     public static final RegistryObject<Block> BLOCKS_RAW_CHROMIUM_BLOCK = register("raw_chromium_block", () ->
-            new ChoppedBlock(BlockBehaviour.Properties.copy(BLOCKS_CHROMIUM_ORE.get())
-            )
+        new ChoppedBlock(BlockBehaviour.Properties.copy(BLOCKS_CHROMIUM_ORE.get())
+        )
     );
 
     public static final RegistryObject<Block> BLOCKS_CHROMIUM_BLOCK = register("chromium_block", () ->
-            new ChromiumBlock(BlockBehaviour.Properties.of(Material.METAL)
-                    .requiresCorrectToolForDrops()
-                    .strength(10.0F, 600.0F)
-                    .sound(SoundType.METAL)
-                    .lightLevel(s -> s.getValue(BLOCK_LIGHT_EMISSION))
-            )
+        new ChromiumBlock(BlockBehaviour.Properties.of(Material.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(10.0F, 600.0F)
+            .sound(SoundType.METAL)
+            .lightLevel(s -> s.getValue(BLOCK_LIGHT_EMISSION))
+        )
     );
 
     public static final RegistryObject<Block> BLOCKS_TINTED_CHROMIUM_BLOCK = register("tinted_chromium_block", () ->
-            new ChoppedBlock(BlockBehaviour.Properties.copy(BLOCKS_CHROMIUM_BLOCK.get())
-                    .lightLevel(s -> 0)
-            )
+        new ChoppedBlock(BlockBehaviour.Properties.copy(BLOCKS_CHROMIUM_BLOCK.get())
+            .lightLevel(s -> 0)
+        )
     );
 
     public static final RegistryObject<Block> BLOCKS_STAINLESS_STEEL_BLOCK = register("stainless_steel_block", () ->
-            new ChoppedBlock(BlockBehaviour.Properties.of(Material.METAL)
-                    .requiresCorrectToolForDrops()
-                    .strength(4.0F, 300.0F)
-                    .sound(SoundType.COPPER)
-            )
+        new ChoppedBlock(BlockBehaviour.Properties.of(Material.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(4.0F, 300.0F)
+            .sound(SoundType.COPPER)
+        )
     );
 
     public static final RegistryObject<Block> BLOCKS_DAMASCUS_STEEL_BLOCK = register("damascus_steel_block", () ->
-            new ChoppedBlock(BlockBehaviour.Properties.of(Material.METAL)
-                    .requiresCorrectToolForDrops()
-                    .strength(10.0F, 600.0F)
-                    .sound(SoundType.NETHERITE_BLOCK)
-            )
+        new ChoppedBlock(BlockBehaviour.Properties.of(Material.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(10.0F, 600.0F)
+            .sound(SoundType.NETHERITE_BLOCK)
+        )
     );
-
 
 
     //SALT
 
     public static final RegistryObject<Block> BLOCKS_HIMALAYAN_SALT_ORE = register("himalayan_salt_ore", () ->
-            new ChoppedBlock(BlockBehaviour.Properties.of(Material.STONE)
-                    .requiresCorrectToolForDrops()
-                    .strength(2.0F, 1.0F)
-                    .noLootTable()
-            )
+        new ChoppedBlock(BlockBehaviour.Properties.of(Material.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(2.0F, 1.0F)
+            .noLootTable()
+        )
     );
 
     public static final RegistryObject<Block> BLOCKS_HIMALAYAN_SALT_BLOCK = register("himalayan_salt_block", () ->
-            new ChoppedFallingBlock(Integer.parseInt("D2BAA5", 16), BlockBehaviour.Properties.of(Material.SAND)
-                    .requiresCorrectToolForDrops()
-                    .strength(2.0F, 1.0F)
-                    .sound(SoundType.SAND)
-            )
+        new ChoppedFallingBlock(Integer.parseInt("D2BAA5", 16), BlockBehaviour.Properties.of(Material.SAND)
+            .requiresCorrectToolForDrops()
+            .strength(2.0F, 1.0F)
+            .sound(SoundType.SAND)
+        )
     );
 
     public static final RegistryObject<Block> BLOCKS_SEA_SALT_BLOCK = register("sea_salt_block", () ->
-            new ChoppedFallingBlock(Integer.parseInt("FFFFFF", 16), BlockBehaviour.Properties.of(Material.SAND)
-                    .requiresCorrectToolForDrops()
-                    .strength(1.0F, 1.0F)
-                    .sound(SoundType.SAND)
-            )
+        new ChoppedFallingBlock(Integer.parseInt("FFFFFF", 16), BlockBehaviour.Properties.of(Material.SAND)
+            .requiresCorrectToolForDrops()
+            .strength(1.0F, 1.0F)
+            .sound(SoundType.SAND)
+        )
     );
-
 
 
     //CROPS
 
     public static final RegistryObject<Block> BLOCKS_TOMATO_CROP = registerNoItem("tomato_crop", () ->
-            new ChoppedCropBlock(2)
+        new ChoppedCropBlock(2)
     );
 
     public static final RegistryObject<Block> BLOCKS_CORN_CROP = registerNoItem("corn_crop", () ->
-            new ChoppedCropBlock(2)
+        new ChoppedCropBlock(2)
     );
     public static final RegistryObject<Block> BLOCKS_ONION_CROP = registerNoItem("onion_crop", () ->
-            new ChoppedCropBlock(1)
+        new ChoppedCropBlock(1)
     );
 
     /*public static final RegistryObject<Block> BLOCKS_GIANT_BEANSTALK = registerNoItem("giant_beanstalk_crop", () ->
             new ChoppedCropBlock(20)
     );*/
 
-    public static  final  RegistryObject<Block> BLOCKS_APPLEWOOD_LOG = register("applewood_log", () ->
-            new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)
-                    .strength(5.0F)
-                    .requiresCorrectToolForDrops()
-            )
+    public static final RegistryObject<Block> BLOCKS_APPLEWOOD_LOG = register("applewood_log", () ->
+        new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)
+            .strength(5.0F)
+            .requiresCorrectToolForDrops()
+        )
     );
-    public static  final  RegistryObject<Block> BLOCKS_APPLEWOOD = register("applewood", () ->
-            new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)
-                    .strength(5.0F)
-                    .requiresCorrectToolForDrops()
-            )
+    public static final RegistryObject<Block> BLOCKS_APPLEWOOD = register("applewood", () ->
+        new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)
+            .strength(5.0F)
+            .requiresCorrectToolForDrops()
+        )
     );
-    public static  final  RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD_LOG = register("stripped_applewood_log", () ->
-            new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)
-                    .strength(5.0F)
-                    .requiresCorrectToolForDrops()
-            )
+    public static final RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD_LOG = register("stripped_applewood_log", () ->
+        new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)
+            .strength(5.0F)
+            .requiresCorrectToolForDrops()
+        )
     );
-    public static  final  RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD = register("stripped_applewood", () ->
-            new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)
-                    .strength(5.0F)
-                    .requiresCorrectToolForDrops()
-            )
+    public static final RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD = register("stripped_applewood", () ->
+        new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)
+            .strength(5.0F)
+            .requiresCorrectToolForDrops()
+        )
     );
 
-    public static  final  RegistryObject<Block> BLOCKS_APPLEWOOD_PLANKS = register("applewood_planks", () ->
-            new ChoppedBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)
-                    .strength(5.0F)
-            )
-            {
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-                    return true;
-                }
-
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-                    return 5;
-                }
-
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-                    return 20;
-                }
+    public static final RegistryObject<Block> BLOCKS_APPLEWOOD_PLANKS = register("applewood_planks", () ->
+        new ChoppedBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)
+            .strength(5.0F)
+        ) {
+            @Override
+            public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                return true;
             }
+
+            @Override
+            public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                return 5;
+            }
+
+            @Override
+            public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                return 20;
+            }
+        }
     );
 
     public static final RegistryObject<Block> BLOCKS_APPLE_SAPLING = register("apple_sapling", () ->
-            new SaplingBlock(new AppleTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING))
+        new SaplingBlock(new AppleTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING))
     );
 
     public static final RegistryObject<Block> BLOCKS_APPLE_LEAVES = register("apple_leaves", () ->
-            new FruitBearingLeavesBlock(Items.APPLE)
+        new FruitBearingLeavesBlock(Items.APPLE)
     );
-
 
 
     //REGISTRY
 
-    public static void register() {}
+    public static void register() {
+    }
 
     private static <T extends Block> RegistryObject<T> registerNoItem(String name, Supplier<T> block) {
         return ChoppedRegistry.BLOCKS.register(name, block);

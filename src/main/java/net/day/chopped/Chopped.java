@@ -4,12 +4,7 @@ import net.day.chopped.configs.ChoppedCommonConfig;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.day.chopped.registry.groups.ChoppedBlocks;
 import net.day.chopped.registry.groups.ChoppedTabs;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.ColorResolver;
-import net.minecraft.world.level.FoliageColor;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,11 +13,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,7 +32,7 @@ public class Chopped {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ChoppedTabs::registerTabs);
     }
 
-    @Mod.EventBusSubscriber(value = Dist.CLIENT, modid=Chopped.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Chopped.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     private static class ClientEvents {
         private static final ColorResolver COLOR_RESOLVER = (pBiome, pX, pZ) -> pBiome.getFoliageColor();
         private static final int APPLE_FOLIAGE = 12899607;
@@ -54,15 +44,15 @@ public class Chopped {
 
         @SubscribeEvent
         static void registerBlockColor(RegisterColorHandlersEvent.Block event) {
-            event.register(((pState, pLevel, pPos, pTintIndex) -> pLevel == null || pPos == null ? 0 : pLevel.getBlockTint(pPos, COLOR_RESOLVER)), ChoppedBlocks.BLOCKS_APPLE_LEAVES.get());
+            //event.register(((pState, pLevel, pPos, pTintIndex) -> pLevel == null || pPos == null ? 0 : pLevel.getBlockTint(pPos, COLOR_RESOLVER)), ChoppedBlocks.BLOCKS_APPLE_LEAVES.get());
         }
 
         @SubscribeEvent
         static void registerItemColor(RegisterColorHandlersEvent.Item event) {
-            event.register((itemColor, item) -> {
+            /*event.register((itemColor, item) -> {
                 BlockState blockstate = ((BlockItem)itemColor.getItem()).getBlock().defaultBlockState();
                 return APPLE_FOLIAGE;
-            }, ChoppedBlocks.BLOCKS_APPLE_LEAVES.get());
+            }, ChoppedBlocks.BLOCKS_APPLE_LEAVES.get());*/
         }
     }
 
