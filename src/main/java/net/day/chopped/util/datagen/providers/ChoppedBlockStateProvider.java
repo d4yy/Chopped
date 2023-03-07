@@ -1,12 +1,11 @@
 package net.day.chopped.util.datagen.providers;
 
 import net.day.chopped.Chopped;
-import net.day.chopped.blocks.crops.ChoppedCropBlock;
+import net.day.chopped.blocks.crops.MultiCropBlock;
 import net.day.chopped.blocks.crops.FruitBearingLeavesBlock;
 import net.day.chopped.registry.groups.ChoppedBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -70,21 +69,20 @@ public class ChoppedBlockStateProvider extends BlockStateProvider {
             .forAllStates(blockState -> {
                 ModelFile file = null;
                 String blockName = getName(blockRegistryObject.get());
-
-                String stage = blockState.getValue(ChoppedCropBlock.AGE).toString();
+                String stageName = switch (blockState.getValue(MultiCropBlock.SECTION)) {
+                    case STALKBASE -> "/stalkbase_stage_";
+                    case STALK1 -> "/stalk1_stage_";
+                    case STALK2 -> "/stalk2_stage_";
+                    case TOP -> "/stalktop_stage_";
+                };
+                String finalName;
+                String stage = blockState.getValue(MultiCropBlock.AGE).toString();
                 ResourceLocation parent = new ResourceLocation("block/" + cropModelShape);
 
-                ModelFile stalkBase = models().singleTexture("block/" + blockName + "/stalkbase_stage_" + stage, parent, cropModelShape, new ResourceLocation(Chopped.MOD_ID, "block/" + blockName + "/stalkbase_stage_" + stage)).renderType("cutout");
-                ModelFile stalk1 = models().singleTexture("block/" + blockName + "/stalk1_stage_" + stage, parent, cropModelShape, new ResourceLocation(Chopped.MOD_ID, "block/" + blockName + "/stalk1_stage_" + stage)).renderType("cutout");
-                ModelFile stalk2 = models().singleTexture("block/" + blockName + "/stalk2_stage_" + stage, parent, cropModelShape, new ResourceLocation(Chopped.MOD_ID, "block/" + blockName + "/stalk2_stage_" + stage)).renderType("cutout");
-                ModelFile stalkTop = models().singleTexture("block/" + blockName + "/stalktop_stage_" + stage, parent, cropModelShape, new ResourceLocation(Chopped.MOD_ID, "block/" + blockName + "/stalktop_stage_" + stage)).renderType("cutout");
 
-                file = switch (blockState.getValue(ChoppedCropBlock.SECTION)) {
-                    case STALKBASE -> stalkBase;
-                    case STALK1 -> stalk1;
-                    case STALK2 -> stalk2;
-                    case TOP -> stalkTop;
-                };
+                finalName = blockName + stageName + stage;
+
+                file = models().singleTexture("block/" + finalName, parent, cropModelShape, new ResourceLocation(Chopped.MOD_ID, "block/" + finalName)).renderType("cutout");
 
                 return ConfiguredModel.builder().modelFile(file).build();
             });

@@ -21,11 +21,12 @@ public class ChoppedSoundDefinitionsProvider extends SoundDefinitionsProvider {
         add(ChoppedSounds.CASSETTE_BE_A_KING, getCassetteDefinition("be_a_king"));
         add(ChoppedSounds.CASSETTE_LET_ME_OHH, getCassetteDefinition("let_me_ohh"));
         add(ChoppedSounds.CASSETTE_DRINKING_WTH_MY_HEADPHONES_ON, getCassetteDefinition("drinking_wth_my_headphones_on"));
+        add(ChoppedSounds.CASSETTE_BIG_SHIPS, getCassetteDefinition("big_ships"));
 
     }
 
     private SoundDefinition getCassetteDefinition(String name) {
-        return definition().with(sound(new ResourceLocation(Chopped.MOD_ID, "cassette." + name)).stream().attenuationDistance(16).volume(1.0F));
+        return definition().with(sound(new ResourceLocation(Chopped.MOD_ID, "cassette." + name)).stream().attenuationDistance(48));
     }
 
 }

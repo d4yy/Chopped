@@ -12,6 +12,7 @@ public class ChoppedSounds {
     public static final RegistryObject<SoundEvent> CASSETTE_BE_A_KING = registerSoundEvents("cassette.be_a_king");
     public static final RegistryObject<SoundEvent> CASSETTE_LET_ME_OHH = registerSoundEvents("cassette.let_me_ohh");
     public static final RegistryObject<SoundEvent> CASSETTE_DRINKING_WTH_MY_HEADPHONES_ON = registerSoundEvents("cassette.drinking_with_my_headphones_on");
+    public static final RegistryObject<SoundEvent> CASSETTE_BIG_SHIPS = registerSoundEvents("cassette.big_ships");
 
     public static void register() {}
 

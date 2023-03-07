@@ -4,7 +4,7 @@ import net.day.chopped.Chopped;
 import net.day.chopped.blocks.ChoppedBlock;
 import net.day.chopped.blocks.ChoppedFallingBlock;
 import net.day.chopped.blocks.ChoppedFlammableRotatedPillarBlock;
-import net.day.chopped.blocks.crops.ChoppedCropBlock;
+import net.day.chopped.blocks.crops.MultiCropBlock;
 import net.day.chopped.blocks.crops.FruitBearingLeavesBlock;
 import net.day.chopped.blocks.materials.ChromiumBlock;
 import net.day.chopped.items.ChoppedBlockItem;
@@ -115,14 +115,14 @@ public class ChoppedBlocks {
     //CROPS
 
     public static final RegistryObject<Block> BLOCKS_TOMATO_CROP = registerNoItem("tomato_crop", () ->
-        new ChoppedCropBlock(2)
+        new MultiCropBlock(2)
     );
 
     public static final RegistryObject<Block> BLOCKS_CORN_CROP = registerNoItem("corn_crop", () ->
-        new ChoppedCropBlock(2)
+        new MultiCropBlock(2)
     );
     public static final RegistryObject<Block> BLOCKS_ONION_CROP = registerNoItem("onion_crop", () ->
-        new ChoppedCropBlock(1)
+        new MultiCropBlock(1)
     );
 
     /*public static final RegistryObject<Block> BLOCKS_GIANT_BEANSTALK = registerNoItem("giant_beanstalk_crop", () ->

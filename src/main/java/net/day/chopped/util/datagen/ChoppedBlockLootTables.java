@@ -1,6 +1,6 @@
 package net.day.chopped.util.datagen;
 
-import net.day.chopped.blocks.crops.ChoppedCropBlock;
+import net.day.chopped.blocks.crops.MultiCropBlock;
 import net.day.chopped.blocks.crops.CropSectionProperty;
 import net.day.chopped.blocks.crops.FruitBearingLeavesBlock;
 import net.day.chopped.registry.ChoppedRegistry;
@@ -73,8 +73,8 @@ public class ChoppedBlockLootTables extends BlockLootSubProvider {
     }
 
     protected LootTable.Builder createMultiCropDrops(Block cropBlock, Item yieldItem, Item seedItem, Float minYield, Float maxYield, Float bonusChance, Item... bonusItem) {
-        LootItemCondition.Builder sufficientAgePropertyCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ChoppedCropBlock.AGE, 7));
-        LootItemCondition.Builder stalkBasePropertyCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ChoppedCropBlock.SECTION, CropSectionProperty.STALKBASE));
+        LootItemCondition.Builder sufficientAgePropertyCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MultiCropBlock.AGE, 7));
+        LootItemCondition.Builder stalkBasePropertyCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MultiCropBlock.SECTION, CropSectionProperty.STALKBASE));
 
         LootTable.Builder table = LootTable.lootTable()
             .withPool(LootPool.lootPool()
