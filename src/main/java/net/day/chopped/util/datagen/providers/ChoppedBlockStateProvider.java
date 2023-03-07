@@ -6,6 +6,7 @@ import net.day.chopped.blocks.crops.FruitBearingLeavesBlock;
 import net.day.chopped.registry.groups.ChoppedBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -94,18 +95,21 @@ public class ChoppedBlockStateProvider extends BlockStateProvider {
             .forAllStates(blockState -> {
                 ModelFile file = null;
                 String blockName = getName(blockRegistryObject.get());
-
-                ModelFile notBearing = models().singleTexture(blockName, new ResourceLocation("block/leaves"), "all", new ResourceLocation(Chopped.MOD_ID, "block/" + blockName)).renderType("cutout_mipped");
-                ModelFile bearing = models().singleTexture(blockName + "_bearing", new ResourceLocation("block/leaves"), "all", new ResourceLocation(Chopped.MOD_ID, "block/" + blockName + "_bearing")).renderType("cutout_mipped");
-                ModelFile bearingAlt = models().singleTexture(blockName + "_bearing_alt", new ResourceLocation("block/leaves"), "all", new ResourceLocation(Chopped.MOD_ID, "block/" + blockName + "_bearing_alt")).renderType("cutout_mipped");
+                String cultivarName = "_cultivar" + blockState.getValue(FruitBearingLeavesBlock.CULTIVAR);
+                String bearingName;
+                String finalName;
 
                 if (!blockState.getValue(FruitBearingLeavesBlock.FRUIT_BEARING)) {
-                    file = notBearing;
+                    bearingName = "";
                 } else if (blockState.getValue(FruitBearingLeavesBlock.FERTILITY) > 5) {
-                    file = bearing;
+                    bearingName = "_bearing";
                 } else {
-                    file = bearingAlt;
+                    bearingName = "_bearing_alt";
                 }
+
+                finalName = blockName + cultivarName + bearingName;
+
+                file = models().singleTexture(finalName, new ResourceLocation("block/leaves"), "all", new ResourceLocation(Chopped.MOD_ID, "block/" + finalName)).renderType("cutout_mipped");
 
                 return ConfiguredModel.builder().modelFile(file).build();
             });

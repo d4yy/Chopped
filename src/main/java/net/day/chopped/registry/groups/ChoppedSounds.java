@@ -4,12 +4,14 @@ import net.day.chopped.Chopped;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ChoppedSounds {
 
-    public static RegistryObject<SoundEvent> WHAT_IT_DO = registerSoundEvents("what_it_do");
+    public static final RegistryObject<SoundEvent> CASSETTE_WHAT_IT_DO = registerSoundEvents("cassette.what_it_do");
+    public static final RegistryObject<SoundEvent> CASSETTE_BE_A_KING = registerSoundEvents("cassette.be_a_king");
+    public static final RegistryObject<SoundEvent> CASSETTE_LET_ME_OHH = registerSoundEvents("cassette.let_me_ohh");
+    public static final RegistryObject<SoundEvent> CASSETTE_DRINKING_WTH_MY_HEADPHONES_ON = registerSoundEvents("cassette.drinking_with_my_headphones_on");
 
     public static void register() {}
 

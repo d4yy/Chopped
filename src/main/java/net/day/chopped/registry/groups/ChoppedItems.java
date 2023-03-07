@@ -17,9 +17,10 @@ public class ChoppedItems {
     public static final RegistryObject<Item> ITEMS_STAINLESS_STEEL_INGOT = ChoppedRegistry.ITEMS.register("stainless_steel_ingot", ChoppedItem::new);
     public static final RegistryObject<Item> ITEMS_DAMASCUS_STEEL_INGOT = ChoppedRegistry.ITEMS.register("damascus_steel_ingot", ChoppedItem::new);
 
+    public static final RegistryObject<Item> ITEMS_GRANNY_SMITH_APPLE = ChoppedRegistry.ITEMS.register("granny_smith_apple", ChoppedItem::new);
+
     public static final RegistryObject<Item> ITEMS_TOMATO = ChoppedRegistry.ITEMS.register("tomato", ChoppedItem::new);
     public static final RegistryObject<Item> ITEMS_TOMATO_SEEDS = ChoppedRegistry.ITEMS.register("tomato_seeds", () -> new ChoppedSeedItem(ChoppedBlocks.BLOCKS_TOMATO_CROP.get()));
-
     public static final RegistryObject<Item> ITEMS_CORN = ChoppedRegistry.ITEMS.register("corn", () -> new ChoppedSeedItem(ChoppedBlocks.BLOCKS_CORN_CROP.get()));
     public static final RegistryObject<Item> ITEMS_ONION = ChoppedRegistry.ITEMS.register("onion", () -> new ChoppedSeedItem(ChoppedBlocks.BLOCKS_ONION_CROP.get()));
     //public static final RegistryObject<Item> ITEMS_MAGIC_BEANS = ChoppedRegistry.ITEMS.register("magic_beans", () -> new ChoppedSeedItem(ChoppedBlocks.BLOCKS_GIANT_BEANSTALK.get()));

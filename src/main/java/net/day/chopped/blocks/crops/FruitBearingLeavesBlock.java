@@ -5,8 +5,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -15,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.Random;
 
@@ -22,33 +28,47 @@ public class FruitBearingLeavesBlock extends LeavesBlock {
     public static final BooleanProperty FRUIT_BEARING = ChoppedBlockStateProperties.FRUIT_BEARING;
     public static final BooleanProperty FERTILE = ChoppedBlockStateProperties.FERTILE;
     public static final IntegerProperty FERTILITY = ChoppedBlockStateProperties.FERTILITY;
+    public static final IntegerProperty CULTIVAR = ChoppedBlockStateProperties.CULTIVAR;
 
-    public final Item[] YIELD_ITEM;
+    public final Item[] YIELD_ITEMS;
 
-    private int timeUntilRipe = 100;
+    //time until ripe in approximate minutes
+    private int timeUntilRipe = 30;
     private int elapsedTicks = 0;
 
-    public FruitBearingLeavesBlock(Item... yieldItem) {
+    public FruitBearingLeavesBlock(Item... yieldItems) {
         super(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES));
-        this.registerDefaultState(this.stateDefinition.any().setValue(FRUIT_BEARING, false).setValue(FERTILE, false).setValue(FERTILITY, Integer.valueOf(0)).setValue(DISTANCE, Integer.valueOf(7)).setValue(PERSISTENT, Boolean.valueOf(false)).setValue(WATERLOGGED, Boolean.valueOf(false)));
-        this.YIELD_ITEM = yieldItem;
+        this.registerDefaultState(this.stateDefinition.any()
+            .setValue(FRUIT_BEARING, false)
+            .setValue(FERTILE, false)
+            .setValue(FERTILITY, Integer.valueOf(0))
+            .setValue(DISTANCE, Integer.valueOf(7))
+            .setValue(PERSISTENT, Boolean.valueOf(false))
+            .setValue(WATERLOGGED, Boolean.valueOf(false))
+            .setValue(CULTIVAR, 0)
+        );
+        this.YIELD_ITEMS = yieldItems;
     }
 
     private int fertilityRandomiser() {
         Random rand = new Random();
         double p = 0.2;
         double u = rand.nextDouble();
-        int k = (int) Math.ceil(Math.log(1 - (1 - Math.pow(p, 10)) * u) / Math.log(1 - p));
+        int k = (int) Math.ceil(Math.log(1 - (1 - Math.pow(p, 10)) * u) / Math.log(1 - p)); //truncated geometric distribution for fertility level probability
         return Math.min(k, 10);
     }
 
     private int adjustAgeByFertility(BlockState blockState) {
-        int multiplier = blockState.getValue(FERTILITY);
+        int fertility = blockState.getValue(FERTILITY);
         int result = 0;
 
-        result = Math.random() <= (0.1 * multiplier) ? 1 : 0;
+        result = Math.random() <= Math.pow(0.1, 10 - fertility) ? 1 : 0; //higher fertility grows faster exponentially
 
         return result;
+    }
+
+    private Item getCultivar(BlockState blockState) {
+        return this.YIELD_ITEMS[blockState.getValue(CULTIVAR)];
     }
 
     @Override
@@ -56,6 +76,7 @@ public class FruitBearingLeavesBlock extends LeavesBlock {
         pBuilder.add(FRUIT_BEARING);
         pBuilder.add(FERTILE);
         pBuilder.add(FERTILITY);
+        pBuilder.add(CULTIVAR);
         pBuilder.add(DISTANCE, PERSISTENT, WATERLOGGED);
     }
 
@@ -77,8 +98,9 @@ public class FruitBearingLeavesBlock extends LeavesBlock {
             return;
         }
 
-        if (this.elapsedTicks < 1200) {
-            elapsedTicks++;
+        //randomTick gets called ~1/s so wait ~ a minute before allowing age adjustment
+        if (this.elapsedTicks < 60) {
+            this.elapsedTicks++;
             return;
         }
 
@@ -91,8 +113,21 @@ public class FruitBearingLeavesBlock extends LeavesBlock {
             }
         }
 
-        elapsedTicks = 0;
+        this.elapsedTicks = 0;
 
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        if (pState.getValue(FRUIT_BEARING)) {
+            this.timeUntilRipe = 30;
+            this.elapsedTicks = 0;
+            popResource(pLevel, pPos, new ItemStack(getCultivar(pState), new Random().nextInt(3) + 1));
+            pLevel.setBlockAndUpdate(pPos, pState.setValue(FRUIT_BEARING, false));
+            return InteractionResult.sidedSuccess(pLevel.isClientSide);
+        }
+        return InteractionResult.PASS;
     }
 
     @Override
