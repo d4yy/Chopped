@@ -24,7 +24,7 @@ public class ChoppedDataGenerators {
 
         generator.addProvider(true, new ChoppedRecipeProvider(packOutput));
         generator.addProvider(true, ChoppedLootTableProvider.create(packOutput));
-        //generator.addProvider(true, new ChoppedBlockStateProvider(packOutput, existingFileHelper));
+        generator.addProvider(true, new ChoppedBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(true, new ChoppedItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(true, new ChoppedSoundDefinitionsProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), new ChoppedWorldGenProvider(packOutput, lookupProvider));

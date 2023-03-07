@@ -95,7 +95,7 @@ public class ChoppedBlockStateProvider extends BlockStateProvider {
             .forAllStates(blockState -> {
                 ModelFile file = null;
                 String blockName = getName(blockRegistryObject.get());
-                String cultivarName = "_cultivar" + blockState.getValue(FruitBearingLeavesBlock.CULTIVAR);
+                String cultivarName = "cultivar" + blockState.getValue(FruitBearingLeavesBlock.CULTIVAR);
                 String bearingName;
                 String finalName;
 
@@ -107,13 +107,13 @@ public class ChoppedBlockStateProvider extends BlockStateProvider {
                     bearingName = "_bearing_alt";
                 }
 
-                finalName = blockName + cultivarName + bearingName;
+                finalName = blockName + "/" + cultivarName + bearingName;
 
-                file = models().singleTexture(finalName, new ResourceLocation("block/leaves"), "all", new ResourceLocation(Chopped.MOD_ID, "block/" + finalName)).renderType("cutout_mipped");
+                file = models().singleTexture("block/" + finalName, new ResourceLocation("block/leaves"), "all", new ResourceLocation(Chopped.MOD_ID, "block/" + finalName)).renderType("cutout_mipped");
 
                 return ConfiguredModel.builder().modelFile(file).build();
             });
-        simpleBlockItem(blockRegistryObject.get(), models().singleTexture(getName(blockRegistryObject.get()), new ResourceLocation("block/leaves"), "all", new ResourceLocation(Chopped.MOD_ID, "block/" + getName(blockRegistryObject.get()))));
+        simpleBlockItem(blockRegistryObject.get(), models().singleTexture(getName(blockRegistryObject.get()), new ResourceLocation("block/leaves"), "all", new ResourceLocation(Chopped.MOD_ID, "block/" + getName(blockRegistryObject.get()) + "/cultivar0")));
     }
 
     private String getName(Block block) {

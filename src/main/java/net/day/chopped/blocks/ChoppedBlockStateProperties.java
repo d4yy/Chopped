@@ -13,6 +13,6 @@ public class ChoppedBlockStateProperties extends BlockStateProperties {
     public static final IntegerProperty BLOCK_LIGHT_ABSORPTION = IntegerProperty.create("light_absorption", 0, 15);
     public static final IntegerProperty BLOCK_LIGHT_EMISSION = IntegerProperty.create("light_emission", 0, 15);
     public static final IntegerProperty FERTILITY = IntegerProperty.create("fertility", 0, 10);
-    public static final IntegerProperty CULTIVAR = IntegerProperty.create("cultivar", 0, 3);
+    public static final IntegerProperty CULTIVAR = IntegerProperty.create("cultivar", 0, 2);
 
 }
