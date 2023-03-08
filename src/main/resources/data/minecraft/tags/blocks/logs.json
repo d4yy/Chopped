@@ -4,6 +4,10 @@
     "chopped:applewood_log",
     "chopped:applewood",
     "chopped:stripped_applewood_log",
-    "chopped:stripped_applewood"
+    "chopped:stripped_applewood",
+    "chopped:citrus_log",
+    "chopped:citrus",
+    "chopped:stripped_citrus_log",
+    "chopped:stripped_citrus"
   ]
 }

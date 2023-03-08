@@ -26,6 +26,11 @@ public class ChoppedItems {
     public static final RegistryObject<Item> ITEMS_CASSETTE_BIG_SHIPS = ChoppedRegistry.ITEMS.register("cassette_big_ships", () -> new RecordItem(19, ChoppedSounds.CASSETTE_BIG_SHIPS, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 4480));
 
     public static final RegistryObject<Item> ITEMS_GRANNY_SMITH_APPLE = ChoppedRegistry.ITEMS.register("granny_smith_apple", ChoppedItem::new);
+    public static final RegistryObject<Item> ITEMS_POISONOUS_APPLE = ChoppedRegistry.ITEMS.register("poisonous_apple", ChoppedItem::new);
+    public static final RegistryObject<Item> ITEMS_SWEET_ORANGE = ChoppedRegistry.ITEMS.register("sweet_orange", ChoppedItem::new);
+    public static final RegistryObject<Item> ITEMS_BITTER_ORANGE = ChoppedRegistry.ITEMS.register("bitter_orange", ChoppedItem::new);
+    public static final RegistryObject<Item> ITEMS_MANDARIN_ORANGE = ChoppedRegistry.ITEMS.register("mandarin_orange", ChoppedItem::new);
+
 
     public static final RegistryObject<Item> ITEMS_TOMATO = ChoppedRegistry.ITEMS.register("tomato", ChoppedItem::new);
     public static final RegistryObject<Item> ITEMS_TOMATO_SEEDS = ChoppedRegistry.ITEMS.register("tomato_seeds", () -> new ChoppedSeedItem(ChoppedBlocks.BLOCKS_TOMATO_CROP.get()));

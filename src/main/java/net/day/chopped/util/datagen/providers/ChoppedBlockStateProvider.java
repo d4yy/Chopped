@@ -40,7 +40,6 @@ public class ChoppedBlockStateProvider extends BlockStateProvider {
             new ResourceLocation(Chopped.MOD_ID, "block/stripped_applewood_log_top"));
         axisBlock((RotatedPillarBlock) ChoppedBlocks.BLOCKS_STRIPPED_APPLEWOOD.get(), new ResourceLocation(Chopped.MOD_ID, "block/stripped_applewood_log"),
             new ResourceLocation(Chopped.MOD_ID, "block/stripped_applewood_log"));
-        fruitBearingLeavesBlock(ChoppedBlocks.BLOCKS_APPLE_LEAVES);
         blockWithItem(ChoppedBlocks.BLOCKS_APPLEWOOD_PLANKS);
         saplingBlock(ChoppedBlocks.BLOCKS_APPLE_SAPLING);
         simpleBlockItem(ChoppedBlocks.BLOCKS_APPLEWOOD_LOG.get(), models().withExistingParent("chopped:applewood_log", "minecraft:block/cube_column"));
@@ -52,6 +51,9 @@ public class ChoppedBlockStateProvider extends BlockStateProvider {
         multiCropBlock(ChoppedBlocks.BLOCKS_ONION_CROP, "crop");
         multiCropBlock(ChoppedBlocks.BLOCKS_TOMATO_CROP, "crop");
         multiCropBlock(ChoppedBlocks.BLOCKS_CORN_CROP, "cross");
+
+        fruitBearingLeavesBlock(ChoppedBlocks.BLOCKS_APPLE_LEAVES);
+        fruitBearingLeavesBlock(ChoppedBlocks.BLOCKS_ORANGE_LEAVES);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

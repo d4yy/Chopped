@@ -24,19 +24,19 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.Random;
 
-public class FruitBearingLeavesBlock extends LeavesBlock {
+public abstract class FruitBearingLeavesBlock extends LeavesBlock {
     public static final BooleanProperty FRUIT_BEARING = ChoppedBlockStateProperties.FRUIT_BEARING;
     public static final BooleanProperty FERTILE = ChoppedBlockStateProperties.FERTILE;
     public static final IntegerProperty FERTILITY = ChoppedBlockStateProperties.FERTILITY;
     public static final IntegerProperty CULTIVAR = ChoppedBlockStateProperties.CULTIVAR;
 
-    public final Item[] YIELD_ITEMS;
-
     //time until ripe in approximate minutes
     private int timeUntilRipe = 30;
     private int elapsedTicks = 0;
+    private int bonusAmount;
+    private Float bonusChance;
 
-    public FruitBearingLeavesBlock(Item... yieldItems) {
+    protected FruitBearingLeavesBlock(int bonusAmount, Float bonusChance) {
         super(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES));
         this.registerDefaultState(this.stateDefinition.any()
             .setValue(FRUIT_BEARING, false)
@@ -47,7 +47,14 @@ public class FruitBearingLeavesBlock extends LeavesBlock {
             .setValue(WATERLOGGED, Boolean.valueOf(false))
             .setValue(CULTIVAR, 0)
         );
-        this.YIELD_ITEMS = yieldItems;
+        this.bonusAmount = bonusAmount;
+        this.bonusChance = bonusChance;
+    }
+
+    protected abstract Item[] getCultivarItems();
+
+    protected Item[] getBonusItems() {
+        return new Item[0];
     }
 
     private int fertilityRandomiser() {
@@ -67,8 +74,8 @@ public class FruitBearingLeavesBlock extends LeavesBlock {
         return result;
     }
 
-    private Item getCultivar(BlockState blockState) {
-        return this.YIELD_ITEMS[blockState.getValue(CULTIVAR)];
+    private Item getCultivarItem(BlockState blockState) {
+        return getCultivarItems()[blockState.getValue(CULTIVAR)];
     }
 
     @Override
@@ -123,7 +130,15 @@ public class FruitBearingLeavesBlock extends LeavesBlock {
         if (pState.getValue(FRUIT_BEARING)) {
             this.timeUntilRipe = 30;
             this.elapsedTicks = 0;
-            popResource(pLevel, pPos, new ItemStack(getCultivar(pState), new Random().nextInt(3) + 1));
+
+            popResource(pLevel, pPos, new ItemStack(getCultivarItem(pState), new Random().nextInt(3) + 1));
+
+            if (getBonusItems().length > 0) {
+                for (Item bonusItem : getBonusItems()) {
+                    if (Math.random() <= this.bonusChance) popResource(pLevel, pPos, new ItemStack(bonusItem, this.bonusAmount));
+                }
+            }
+
             pLevel.setBlockAndUpdate(pPos, pState.setValue(FRUIT_BEARING, false));
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
         }
