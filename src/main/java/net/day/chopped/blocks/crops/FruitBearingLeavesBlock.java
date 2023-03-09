@@ -131,11 +131,11 @@ public abstract class FruitBearingLeavesBlock extends LeavesBlock {
             this.timeUntilRipe = 30;
             this.elapsedTicks = 0;
 
-            popResource(pLevel, pPos, new ItemStack(getCultivarItem(pState), new Random().nextInt(3) + 1));
+            popResourceFromFace(pLevel, pPos, pHit.getDirection(), new ItemStack(getCultivarItem(pState), new Random().nextInt(3) + 1));
 
             if (getBonusItems().length > 0) {
                 for (Item bonusItem : getBonusItems()) {
-                    if (Math.random() <= this.bonusChance) popResource(pLevel, pPos, new ItemStack(bonusItem, this.bonusAmount));
+                    if (Math.random() <= this.bonusChance) popResourceFromFace(pLevel, pPos, pHit.getDirection(), new ItemStack(bonusItem, this.bonusAmount));
                 }
             }
 

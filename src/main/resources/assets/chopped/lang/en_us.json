@@ -26,5 +26,8 @@
   "block.chopped.tinted_chromium_block": "Tinted Block of Chromium",
   "block.chopped.stainless_steel_block": "Block of Stainless Steel",
   "block.chopped.sea_salt_block": "Block of Sea Salt",
-  "block.chopped.himalayan_salt_block": "Block of Himalayan Salt"
+  "block.chopped.himalayan_salt_block": "Block of Himalayan Salt",
+
+  "###VANILLA OVERRIDES###": "--------------------------------------",
+  "item.minecraft.apple": "Red Delicious Apple"
 }

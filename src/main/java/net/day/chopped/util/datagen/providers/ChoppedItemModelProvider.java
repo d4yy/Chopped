@@ -35,6 +35,7 @@ public class ChoppedItemModelProvider extends ItemModelProvider {
         simpleItem(ChoppedItems.ITEMS_CASSETTE_DRINKING_WTH_MY_HEADPHONES_ON);
         simpleItem(ChoppedItems.ITEMS_CASSETTE_BIG_SHIPS);
         simpleItem(ChoppedItems.ITEMS_GRANNY_SMITH_APPLE);
+        simpleItem(ChoppedItems.ITEMS_POISONOUS_APPLE);
 
 
         saplingItem(ChoppedBlocks.BLOCKS_APPLE_SAPLING);
