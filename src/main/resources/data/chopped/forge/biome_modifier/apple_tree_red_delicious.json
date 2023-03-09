@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#forge:is_plains",
-  "features": "chopped:apple_tree_red_delicious_placed",
-  "step": "vegetal_decoration"
-}

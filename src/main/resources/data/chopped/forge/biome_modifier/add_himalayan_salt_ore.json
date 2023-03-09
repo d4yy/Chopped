@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#forge:is_peak",
-  "features": "chopped:himalayan_salt_ore_placed",
-  "step": "underground_ores"
-}
