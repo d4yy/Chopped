@@ -17,6 +17,7 @@
   "###ITEMS###": "--------------------------------------",
   "item.chopped.chromium_ingot": "Chromium Ingot",
   "item.chopped.raw_chromium": "Raw Chromium",
+  "item.chopped.fruit_basket": "Fruit Basket",
 
   "###BLOCKS###": "--------------------------------------",
   "block.chopped.chromium_ore": "Chromium Ore",

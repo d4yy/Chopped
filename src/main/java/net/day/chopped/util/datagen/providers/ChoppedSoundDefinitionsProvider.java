@@ -26,7 +26,7 @@ public class ChoppedSoundDefinitionsProvider extends SoundDefinitionsProvider {
     }
 
     private SoundDefinition getCassetteDefinition(String name) {
-        return definition().with(sound(new ResourceLocation(Chopped.MOD_ID, "cassette." + name)).stream().attenuationDistance(48));
+        return definition().with(sound(new ResourceLocation(Chopped.MOD_ID, "cassette." + name)).stream());
     }
 
 }

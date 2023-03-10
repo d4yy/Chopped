@@ -1,6 +1,7 @@
 package net.day.chopped.registry.groups;
 
 import net.day.chopped.Chopped;
+import net.day.chopped.items.ChoppedBundleItem;
 import net.day.chopped.items.ChoppedItem;
 import net.day.chopped.items.ChoppedSeedItem;
 import net.day.chopped.registry.ChoppedRegistry;
@@ -24,6 +25,8 @@ public class ChoppedItems {
     public static final RegistryObject<Item> ITEMS_CASSETTE_LET_ME_OHH = ChoppedRegistry.ITEMS.register("cassette_let_me_ohh", () -> new RecordItem(18, ChoppedSounds.CASSETTE_LET_ME_OHH, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 3300));
     public static final RegistryObject<Item> ITEMS_CASSETTE_DRINKING_WTH_MY_HEADPHONES_ON = ChoppedRegistry.ITEMS.register("cassette_drinking_with_my_headphones_on", () -> new RecordItem(19, ChoppedSounds.CASSETTE_DRINKING_WTH_MY_HEADPHONES_ON, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 6000));
     public static final RegistryObject<Item> ITEMS_CASSETTE_BIG_SHIPS = ChoppedRegistry.ITEMS.register("cassette_big_ships", () -> new RecordItem(19, ChoppedSounds.CASSETTE_BIG_SHIPS, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 4480));
+
+    public static final RegistryObject<Item> FRUIT_BASKET = ChoppedRegistry.ITEMS.register("fruit_basket", () -> new ChoppedBundleItem(1280, ChoppedTags.Items.FRUIT_BASKET_ALLOWED));
 
     public static final RegistryObject<Item> ITEMS_GRANNY_SMITH_APPLE = ChoppedRegistry.ITEMS.register("granny_smith_apple", ChoppedItem::new);
     public static final RegistryObject<Item> ITEMS_POISONOUS_APPLE = ChoppedRegistry.ITEMS.register("poisonous_apple", ChoppedItem::new);

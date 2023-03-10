@@ -1,6 +1,7 @@
 package net.day.chopped.blocks.crops;
 
 import net.day.chopped.blocks.ChoppedBlockStateProperties;
+import net.day.chopped.registry.groups.ChoppedItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -131,16 +132,18 @@ public abstract class FruitBearingLeavesBlock extends LeavesBlock {
             this.timeUntilRipe = 30;
             this.elapsedTicks = 0;
 
-            popResourceFromFace(pLevel, pPos, pHit.getDirection(), new ItemStack(getCultivarItem(pState), new Random().nextInt(3) + 1));
+            if (pPlayer.getItemInHand(pHand).getItem() != ChoppedItems.FRUIT_BASKET.get()) {
+                popResourceFromFace(pLevel, pPos, pHit.getDirection(), new ItemStack(getCultivarItem(pState), new Random().nextInt(3) + 1));
 
-            if (getBonusItems().length > 0) {
-                for (Item bonusItem : getBonusItems()) {
-                    if (Math.random() <= this.bonusChance) popResourceFromFace(pLevel, pPos, pHit.getDirection(), new ItemStack(bonusItem, this.bonusAmount));
+                if (getBonusItems().length > 0) {
+                    for (Item bonusItem : getBonusItems()) {
+                        if (Math.random() <= this.bonusChance)
+                            popResourceFromFace(pLevel, pPos, pHit.getDirection(), new ItemStack(bonusItem, this.bonusAmount));
+                    }
                 }
+                pLevel.setBlockAndUpdate(pPos, pState.setValue(FRUIT_BEARING, false));
+                return InteractionResult.sidedSuccess(pLevel.isClientSide);
             }
-
-            pLevel.setBlockAndUpdate(pPos, pState.setValue(FRUIT_BEARING, false));
-            return InteractionResult.sidedSuccess(pLevel.isClientSide);
         }
         return InteractionResult.PASS;
     }

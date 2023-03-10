@@ -54,11 +54,11 @@ public class ChoppedBlocks {
     public static final RegistryObject<Block> BLOCKS_ONION_CROP = registerNoItem("onion_crop", () -> new MultiCropBlock(1));
     //public static final RegistryObject<Block> BLOCKS_GIANT_BEANSTALK = registerNoItem("giant_beanstalk_crop", () -> new ChoppedCropBlock(20));
 
-    public static final RegistryObject<Block> BLOCKS_APPLEWOOD_LOG = register("applewood_log", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).strength(5.0F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> BLOCKS_APPLEWOOD = register("applewood", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).strength(5.0F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD_LOG = register("stripped_applewood_log", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).strength(5.0F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD = register("stripped_applewood", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD).strength(5.0F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> BLOCKS_APPLEWOOD_PLANKS = register("applewood_planks", () -> new ChoppedBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(5.0F)) {
+    public static final RegistryObject<Block> BLOCKS_APPLEWOOD_LOG = register("applewood_log", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+    public static final RegistryObject<Block> BLOCKS_APPLEWOOD = register("applewood", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+    public static final RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD_LOG = register("stripped_applewood_log", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+    public static final RegistryObject<Block> BLOCKS_STRIPPED_APPLEWOOD = register("stripped_applewood", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+    public static final RegistryObject<Block> BLOCKS_APPLEWOOD_PLANKS = register("applewood_planks", () -> new ChoppedBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
         @Override
         public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
             return true;
@@ -75,11 +75,11 @@ public class ChoppedBlocks {
         }
     });
 
-    public static final RegistryObject<Block> BLOCKS_CITRUS_LOG = register("citrus_log", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).strength(5.0F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> BLOCKS_CITRUS = register("citrus_wood", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).strength(5.0F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> BLOCKS_STRIPPED_CITRUS_LOG = register("stripped_citrus_log", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).strength(5.0F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> BLOCKS_STRIPPED_CITRUS = register("stripped_citrus_wood", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD).strength(5.0F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> BLOCKS_CITRUS_PLANKS = register("citrus_planks", () -> new ChoppedBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(5.0F)) {
+    public static final RegistryObject<Block> BLOCKS_CITRUS_LOG = register("citrus_log", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+    public static final RegistryObject<Block> BLOCKS_CITRUS = register("citrus_wood", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+    public static final RegistryObject<Block> BLOCKS_STRIPPED_CITRUS_LOG = register("stripped_citrus_log", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+    public static final RegistryObject<Block> BLOCKS_STRIPPED_CITRUS = register("stripped_citrus_wood", () -> new ChoppedFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+    public static final RegistryObject<Block> BLOCKS_CITRUS_PLANKS = register("citrus_planks", () -> new ChoppedBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
         @Override
         public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
             return true;
@@ -99,12 +99,12 @@ public class ChoppedBlocks {
     public static final RegistryObject<Block> BLOCKS_APPLE_SAPLING = register("apple_sapling", () -> new SaplingBlock(new AppleTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> BLOCKS_APPLE_LEAVES = register("apple_leaves", () -> new FruitBearingLeavesBlock(1, 0.001F) {
         @Override
-        protected Item[] getCultivarItems() {
+        public Item[] getCultivarItems() {
             return CultivarType.APPLE;
         }
 
         @Override
-        protected Item[] getBonusItems() {
+        public Item[] getBonusItems() {
             return new Item[]{ChoppedItems.ITEMS_POISONOUS_APPLE.get()};
         }
     });

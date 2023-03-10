@@ -1,6 +1,5 @@
 package net.day.chopped.items;
 
-import net.day.chopped.registry.groups.ChoppedTabs;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
