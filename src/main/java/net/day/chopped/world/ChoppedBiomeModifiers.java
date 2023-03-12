@@ -2,6 +2,7 @@ package net.day.chopped.world;
 
 import net.day.chopped.Chopped;
 import net.day.chopped.world.features.ChoppedPlacedFeatures;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -23,8 +24,7 @@ public class ChoppedBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_HIMALAYAN_SALT_ORE = key("himalayan_salt_ore");
     public static final ResourceKey<BiomeModifier> ADD_SEA_SALT_DEPOSIT = key("sea_salt_deposit");
 
-    public static final ResourceKey<BiomeModifier> ADD_APPLE_TREE_RED_DELICIOUS = key("apple_tree_red_delicious");
-    public static final ResourceKey<BiomeModifier> ADD_APPLE_TREE_GRANNY_SMITH = key("apple_tree_granny_smith");
+    public static final ResourceKey<BiomeModifier> ADD_APPLE_TREES = key("apple_trees");
 
 
     public static void bootstrap(final BootstapContext<BiomeModifier> context) {
@@ -33,28 +33,23 @@ public class ChoppedBiomeModifiers {
 
         context.register(ADD_CHROMIUM_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
             tag(biomes, Tags.Biomes.IS_DRY_OVERWORLD),
-            feature(features, ChoppedPlacedFeatures.CHROMIUM_ORE_PLACED),
+            features(features, ChoppedPlacedFeatures.CHROMIUM_ORE_PLACED),
             GenerationStep.Decoration.UNDERGROUND_ORES
         ));
         context.register(ADD_HIMALAYAN_SALT_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
             tag(biomes, Tags.Biomes.IS_PEAK),
-            feature(features, ChoppedPlacedFeatures.HIMALAYAN_SALT_ORE_PLACED),
+            features(features, ChoppedPlacedFeatures.HIMALAYAN_SALT_ORE_PLACED),
             GenerationStep.Decoration.UNDERGROUND_ORES
         ));
         context.register(ADD_SEA_SALT_DEPOSIT, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
             tag(biomes, BiomeTags.IS_OCEAN),
-            feature(features, ChoppedPlacedFeatures.SEA_SALT_DEPOSIT_PLACED),
+            features(features, ChoppedPlacedFeatures.SEA_SALT_DEPOSIT_PLACED),
             GenerationStep.Decoration.UNDERGROUND_ORES
         ));
 
-        context.register(ADD_APPLE_TREE_RED_DELICIOUS, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_APPLE_TREES, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
             tag(biomes, Tags.Biomes.IS_PLAINS),
-            feature(features, ChoppedPlacedFeatures.APPLE_TREE_RED_DELICIOUS_PLACED),
-            GenerationStep.Decoration.VEGETAL_DECORATION
-        ));
-        context.register(ADD_APPLE_TREE_GRANNY_SMITH, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-            tag(biomes, Tags.Biomes.IS_PLAINS),
-            feature(features, ChoppedPlacedFeatures.APPLE_TREE_GRANNY_SMITH_PLACED),
+            features(features, ChoppedPlacedFeatures.APPLE_TREE_RED_DELICIOUS_PLACED, ChoppedPlacedFeatures.APPLE_TREE_GRANNY_SMITH_PLACED),
             GenerationStep.Decoration.VEGETAL_DECORATION
         ));
     }
@@ -67,7 +62,7 @@ public class ChoppedBiomeModifiers {
         return holderGetter.getOrThrow(key);
     }
 
-    private static HolderSet<PlacedFeature> feature(final HolderGetter<PlacedFeature> holderGetter, final ResourceKey<PlacedFeature> feature) {
-        return HolderSet.direct(holderGetter.getOrThrow(feature));
+    private static HolderSet<PlacedFeature> features(final HolderGetter<PlacedFeature> holderGetter, final ResourceKey<PlacedFeature>... feature) {
+        return HolderSet.direct(holderGetter::getOrThrow, feature);
     }
 }

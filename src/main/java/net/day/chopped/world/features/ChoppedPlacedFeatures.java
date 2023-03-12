@@ -35,20 +35,20 @@ public class ChoppedPlacedFeatures {
                 HeightRangePlacement.of(BiasedToBottomHeight.of(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(30), 1)),
                 BiomeFilter.biome(),
                 InSquarePlacement.spread(),
-                CountPlacement.of(4)
+                CountPlacement.of(50)
         ));
         register(context, HIMALAYAN_SALT_ORE_PLACED, configuredFeatures.getOrThrow(ChoppedConfiguredFeatures.HIMALAYAN_SALT_ORE), List.of(
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(164), VerticalAnchor.top()),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(200), VerticalAnchor.top()),
                 BiomeFilter.biome(),
                 InSquarePlacement.spread(),
-                CountPlacement.of(2)
+                CountPlacement.of(250)
         ));
 
         register(context, SEA_SALT_DEPOSIT_PLACED, configuredFeatures.getOrThrow(ChoppedConfiguredFeatures.SEA_SALT_DEPOSIT), List.of(
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(32), VerticalAnchor.absolute(64)),
                 BiomeFilter.biome(),
                 InSquarePlacement.spread(),
-                CountPlacement.of(2)
+                CountPlacement.of(50)
         ));
 
         register(context, APPLE_TREE_RED_DELICIOUS_PLACED, configuredFeatures.getOrThrow(ChoppedConfiguredFeatures.APPLE_TREE_RED_DELICIOUS),

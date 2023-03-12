@@ -1,5 +1,6 @@
 package net.day.chopped.items;
 
+import net.day.chopped.Chopped;
 import net.day.chopped.blocks.crops.CultivarType;
 import net.day.chopped.blocks.crops.FruitBearingLeavesBlock;
 import net.day.chopped.registry.groups.ChoppedBlocks;
@@ -30,12 +31,19 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Stream;
 
+@Mod.EventBusSubscriber(modid = Chopped.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ChoppedBundleItem extends ChoppedItem {
     private static int maxWeight = 64;
     private static TagKey<?> allowedTag;
@@ -43,10 +51,12 @@ public class ChoppedBundleItem extends ChoppedItem {
 
     public ChoppedBundleItem(int maxWeight, TagKey<?> allowedTag) {
         super();
+        MinecraftForge.EVENT_BUS.register(this);
         ChoppedBundleItem.maxWeight = maxWeight;
         ChoppedBundleItem.allowedTag = allowedTag;
     }
 
+    @Override
     public boolean overrideStackedOnOther(ItemStack pStack, Slot pSlot, ClickAction pAction, Player pPlayer) {
         if (pAction != ClickAction.SECONDARY) {
             return false;
@@ -73,6 +83,7 @@ public class ChoppedBundleItem extends ChoppedItem {
         return false;
     }
 
+    @Override
     public boolean overrideOtherStackedOnMe(ItemStack pStack, ItemStack pOther, Slot pSlot, ClickAction pAction, Player pPlayer, SlotAccess pAccess) {
         if (pAction == ClickAction.SECONDARY && pSlot.allowModification(pPlayer)) {
             if (pOther.getTags().anyMatch(allowedTag::equals)) {
@@ -135,6 +146,25 @@ public class ChoppedBundleItem extends ChoppedItem {
         return InteractionResult.PASS;
     }
 
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void pickupAllowedItem(EntityItemPickupEvent event) {
+        if (event.getItem().getItem().getTags().anyMatch(allowedTag::equals)) {
+            Player player = event.getEntity();
+            ItemStack bundle = null;
+            for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                if (player.getInventory().getItem(i).getItem() == this) {
+                    bundle = player.getInventory().getItem(i);
+                    break;
+                }
+            }
+            if (bundle != null && getContentWeight(bundle) < maxWeight) {
+                int a = add(bundle, event.getItem().getItem().copy());
+                event.getItem().getItem().shrink(a);
+                event.setResult(Event.Result.ALLOW);
+            }
+        }
+    }
+
     private Item[] getCultivarTypeAndItems(BlockState blockState) {
         if (blockState.getBlock() == ChoppedBlocks.BLOCKS_APPLE_LEAVES.get()) {
             return CultivarType.APPLE;
@@ -143,14 +173,17 @@ public class ChoppedBundleItem extends ChoppedItem {
         }
     }
 
+    @Override
     public boolean isBarVisible(ItemStack pStack) {
         return getContentWeight(pStack) > 0;
     }
 
+    @Override
     public int getBarWidth(ItemStack pStack) {
         return Math.min(1 + 12 * getContentWeight(pStack) / maxWeight, 13);
     }
 
+    @Override
     public int getBarColor(ItemStack pStack) {
         return BAR_COLOR;
     }
@@ -224,12 +257,15 @@ public class ChoppedBundleItem extends ChoppedItem {
                 return 64;
             }
         }
+        if (pStack.getMaxStackSize() == 1) {
+            return 64;
+        }
         return 64 / pStack.getMaxStackSize();
     }
 
     private static int getContentWeight(ItemStack pStack) {
-        return getContents(pStack).mapToInt((p_186356_) -> {
-            return getWeight(p_186356_) * p_186356_.getCount();
+        return getContents(pStack).mapToInt((stack) -> {
+            return getWeight(stack) * stack.getCount();
         }).sum();
     }
 
@@ -285,16 +321,19 @@ public class ChoppedBundleItem extends ChoppedItem {
         }
     }
 
+    @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack pStack) {
         NonNullList<ItemStack> nonnulllist = NonNullList.create();
         getContents(pStack).forEach(nonnulllist::add);
         return Optional.of(new BundleTooltip(nonnulllist, getContentWeight(pStack)));
     }
 
+    @Override
     public void appendHoverText(ItemStack pStack, Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.translatable("item.minecraft.bundle.fullness", getContentWeight(pStack), maxWeight).withStyle(ChatFormatting.GRAY));
     }
 
+    @Override
     public void onDestroyed(ItemEntity pItemEntity) {
         ItemUtils.onContainerDestroyed(pItemEntity, getContents(pItemEntity.getItem()));
     }

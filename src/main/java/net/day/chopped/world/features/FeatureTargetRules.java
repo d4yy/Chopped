@@ -17,14 +17,14 @@ import java.util.List;
 public class FeatureTargetRules {
     public static class OreReplaceTargets {
         public static final Supplier<List<OreConfiguration.TargetBlockState>> ORE_CHROMIUM_TARGET_LIST = Suppliers.memoize(() -> List.of(
-                OreConfiguration.target(TargetRules.STONE_ORE_TARGET, ChoppedBlocks.BLOCKS_CHROMIUM_ORE.get().defaultBlockState()),
-                OreConfiguration.target(TargetRules.DEEPSLATE_ORE_TARGET, ChoppedBlocks.BLOCKS_DEEPSLATE_CHROMIUM_ORE.get().defaultBlockState())
+            OreConfiguration.target(TargetRules.STONE_ORE_TARGET, ChoppedBlocks.BLOCKS_CHROMIUM_ORE.get().defaultBlockState()),
+            OreConfiguration.target(TargetRules.DEEPSLATE_ORE_TARGET, ChoppedBlocks.BLOCKS_DEEPSLATE_CHROMIUM_ORE.get().defaultBlockState())
         ));
         public static final Supplier<List<OreConfiguration.TargetBlockState>> ORE_HIMALAYAN_SALT_TARGET_LIST = Suppliers.memoize(() -> List.of(
-                OreConfiguration.target(TargetRules.STONE_ORE_TARGET, ChoppedBlocks.BLOCKS_HIMALAYAN_SALT_ORE.get().defaultBlockState())
+            OreConfiguration.target(TargetRules.STONE_ORE_TARGET, ChoppedBlocks.BLOCKS_HIMALAYAN_SALT_ORE.get().defaultBlockState())
         ));
         public static final Supplier<List<OreConfiguration.TargetBlockState>> ORE_SEA_SALT_TARGET_LIST = Suppliers.memoize(() -> List.of(
-                OreConfiguration.target(TargetRules.REGULAR_SAND, ChoppedBlocks.BLOCKS_SEA_SALT_BLOCK.get().defaultBlockState())
+            OreConfiguration.target(TargetRules.REGULAR_SAND, ChoppedBlocks.BLOCKS_SEA_SALT_BLOCK.get().defaultBlockState())
         ));
     }
 
