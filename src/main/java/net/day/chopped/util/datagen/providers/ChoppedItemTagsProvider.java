@@ -7,8 +7,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -21,16 +23,6 @@ public class ChoppedItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(ChoppedTags.Items.FRUIT_BASKET_ALLOWED).add(
-            Items.APPLE,
-            Items.GOLDEN_APPLE,
-            Items.ENCHANTED_GOLDEN_APPLE,
-            Items.CHORUS_FRUIT,
-            ChoppedItems.ITEMS_GRANNY_SMITH_APPLE.get(),
-            ChoppedItems.ITEMS_POISONOUS_APPLE.get(),
-            ChoppedItems.ITEMS_SWEET_ORANGE.get(),
-            ChoppedItems.ITEMS_BITTER_ORANGE.get(),
-            ChoppedItems.ITEMS_MANDARIN_ORANGE.get()
-        );
+        tag(ChoppedTags.Items.FRUIT_BASKET_ALLOWED).add(Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE, Items.CHORUS_FRUIT, ChoppedItems.ITEMS_GRANNY_SMITH_APPLE.get(), ChoppedItems.ITEMS_POISONOUS_APPLE.get(), ChoppedItems.ITEMS_SWEET_ORANGE.get(), ChoppedItems.ITEMS_BITTER_ORANGE.get(), ChoppedItems.ITEMS_MANDARIN_ORANGE.get());
     }
 }

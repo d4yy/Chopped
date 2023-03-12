@@ -1,7 +1,7 @@
 package net.day.chopped.world.features.trees.types;
 
 import com.mojang.serialization.Codec;
-import net.day.chopped.world.features.trees.configurations.DroopingTreeConfiguration;
+import net.day.chopped.world.features.trees.configurations.ShrubTreeConfiguration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -10,16 +10,18 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.BiConsumer;
 
-public class DroopingTreeFeature extends ChoppedTreeFeature<DroopingTreeConfiguration> {
-    public DroopingTreeFeature(Codec<DroopingTreeConfiguration> codec) {
+public class ShrubTreeFeature extends ChoppedTreeFeature<ShrubTreeConfiguration> {
+    public ShrubTreeFeature(Codec<ShrubTreeConfiguration> codec) {
         super(codec);
     }
 
     @Override //AT
     protected boolean doPlace(WorldGenLevel world, RandomSource random, BlockPos startPos, BiConsumer<BlockPos, BlockState> roots, BiConsumer<BlockPos, BlockState> logs, BiConsumer<BlockPos, BlockState> leaves, TreeConfiguration configBase) {
-        DroopingTreeConfiguration config = (DroopingTreeConfiguration) configBase;
+        ShrubTreeConfiguration config = (ShrubTreeConfiguration) configBase;
 
         while (startPos.getY() > 1 && canReplace(world, startPos.below())) {
             startPos = startPos.below();
@@ -37,30 +39,24 @@ public class DroopingTreeFeature extends ChoppedTreeFeature<DroopingTreeConfigur
         }
 
         Direction[] horizontalAxis = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
-        Direction firstBranchDirection = horizontalAxis[random.nextInt(4)];
+        ArrayList<Direction> placedDirections = new ArrayList<>(Arrays.stream(horizontalAxis).toList());
 
-        //Branch 1
-        this.placeLog(world, topPos.relative(firstBranchDirection, 1), firstBranchDirection.getAxis(), logs, config);
-        this.generateLeafLayer(world, topPos.relative(firstBranchDirection, 1), 2, leaves, config);
-        this.placeLog(world, topPos.relative(firstBranchDirection, 2), firstBranchDirection.getAxis(), logs, config);
-        this.generateLeafLayer(world, topPos.relative(firstBranchDirection, 2), 2, leaves, config);
-        this.placeLog(world, topPos.relative(firstBranchDirection, 3).below(), firstBranchDirection.getAxis(), logs, config);
-        this.generateLeafLayer(world, topPos.relative(firstBranchDirection, 3).below(), 2, leaves, config);
-        this.placeLog(world, topPos.relative(firstBranchDirection, 4).below(2), firstBranchDirection.getAxis(), logs, config);
-        this.generateLeafLayer(world, topPos.relative(firstBranchDirection, 4).below(2), 2, leaves, config);
-
-        //Branch 2
-        this.placeLog(world, topPos.relative(firstBranchDirection, -1).below(2), firstBranchDirection.getAxis(), logs, config);
-        this.generateLeafLayer(world, topPos.relative(firstBranchDirection, -1).below(2), 2, leaves, config);
-        this.placeLog(world, topPos.relative(firstBranchDirection, -2).below(2), firstBranchDirection.getAxis(), logs, config);
-        this.generateLeafLayer(world, topPos.relative(firstBranchDirection, -2).below(2), 2, leaves, config);
-        this.placeLog(world, topPos.relative(firstBranchDirection, -3).below(3), firstBranchDirection.getAxis(), logs, config);
-        this.generateLeafLayer(world, topPos.relative(firstBranchDirection, -3).below(3), 2, leaves, config);
+        for (int i = 0; i < height; i++) {
+            Direction randomDir = placedDirections.get(random.nextInt(placedDirections.size()));
+            this.placeLog(world, topPos.relative(randomDir, 1).below(i), randomDir.getAxis(), logs, config);
+            this.generateLeafLayer(world, topPos.relative(randomDir, 1).below(i), 3, leaves, config);
+            if (placedDirections.size() == 1) {
+                placedDirections.addAll(Arrays.stream(horizontalAxis).toList());
+                placedDirections.remove(randomDir);
+            } else {
+                placedDirections.remove(randomDir);
+            }
+        }
 
         return true;
     }
 
-    public void generateLeafLayer(LevelAccessor world, BlockPos pos, int radius, BiConsumer<BlockPos, BlockState> leaves, DroopingTreeConfiguration config) {
+    public void generateLeafLayer(LevelAccessor world, BlockPos pos, int radius, BiConsumer<BlockPos, BlockState> leaves, ShrubTreeConfiguration config) {
         int innerDensity = 0;
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dy = -radius; dy <= radius; dy++) {
@@ -75,7 +71,7 @@ public class DroopingTreeFeature extends ChoppedTreeFeature<DroopingTreeConfigur
             }
         }
         int outerRadius = radius + 1;
-        int outerDensity = innerDensity / 2;
+        int outerDensity = (int) (innerDensity / 1.5);
         for (int dx = -outerRadius; dx <= outerRadius; dx++) {
             for (int dy = -outerRadius; dy <= outerRadius; dy++) {
                 for (int dz = -outerRadius; dz <= outerRadius; dz++) {

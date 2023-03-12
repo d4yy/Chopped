@@ -3,7 +3,6 @@ package net.day.chopped.blocks.crops;
 import net.day.chopped.blocks.ChoppedBlockStateProperties;
 import net.day.chopped.registry.groups.ChoppedItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -11,7 +10,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -34,8 +32,8 @@ public abstract class FruitBearingLeavesBlock extends LeavesBlock {
     //time until ripe in approximate minutes
     private int timeUntilRipe = 30;
     private int elapsedTicks = 0;
-    private int bonusAmount;
-    private Float bonusChance;
+    private final int bonusAmount;
+    private final Float bonusChance;
 
     protected FruitBearingLeavesBlock(int bonusAmount, Float bonusChance) {
         super(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES));
@@ -147,20 +145,4 @@ public abstract class FruitBearingLeavesBlock extends LeavesBlock {
         }
         return InteractionResult.PASS;
     }
-
-    @Override
-    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return true;
-    }
-
-    @Override
-    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return 30;
-    }
-
-    @Override
-    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return 60;
-    }
-
 }

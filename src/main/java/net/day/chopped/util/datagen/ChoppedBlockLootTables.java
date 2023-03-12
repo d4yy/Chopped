@@ -52,9 +52,9 @@ public class ChoppedBlockLootTables extends BlockLootSubProvider {
         dropSelf(ChoppedBlocks.BLOCKS_STRIPPED_APPLEWOOD_LOG.get());
         dropSelf(ChoppedBlocks.BLOCKS_APPLE_SAPLING.get());
         dropSelf(ChoppedBlocks.BLOCKS_CITRUS_LOG.get());
-        dropSelf(ChoppedBlocks.BLOCKS_CITRUS.get());
+        dropSelf(ChoppedBlocks.BLOCKS_CITRUS_WOOD.get());
         dropSelf(ChoppedBlocks.BLOCKS_CITRUS_PLANKS.get());
-        dropSelf(ChoppedBlocks.BLOCKS_STRIPPED_CITRUS.get());
+        dropSelf(ChoppedBlocks.BLOCKS_STRIPPED_CITRUS_WOOD.get());
         dropSelf(ChoppedBlocks.BLOCKS_STRIPPED_CITRUS_LOG.get());
         dropSelf(ChoppedBlocks.BLOCKS_ORANGE_SAPLING.get());
 

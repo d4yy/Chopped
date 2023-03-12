@@ -4,15 +4,18 @@ import net.day.chopped.configs.ChoppedCommonConfig;
 import net.day.chopped.registry.ChoppedRegistry;
 import net.day.chopped.registry.groups.ChoppedBlocks;
 import net.day.chopped.registry.groups.ChoppedTabs;
+import net.day.chopped.util.BlockTools;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,13 +26,19 @@ public class Chopped {
     public static final String MOD_ID = "chopped";
 
     public Chopped() {
+        MinecraftForge.EVENT_BUS.register(this);
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
         ChoppedRegistry.register();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ChoppedCommonConfig.SPEC, "chopped-common.toml");
 
-        MinecraftForge.EVENT_BUS.register(this);
+        eventBus.addListener(this::setup);
+        eventBus.addListener(ChoppedTabs::registerTabs);
+    }
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ChoppedTabs::registerTabs);
+    private void setup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(BlockTools::registerBlockActions);
     }
 
     @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Chopped.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
