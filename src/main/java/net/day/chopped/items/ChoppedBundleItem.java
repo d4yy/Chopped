@@ -1,12 +1,7 @@
 package net.day.chopped.items;
 
 import net.day.chopped.Chopped;
-import net.day.chopped.blocks.crops.CultivarType;
-import net.day.chopped.blocks.crops.FruitBearingLeavesBlock;
-import net.day.chopped.registry.groups.ChoppedBlocks;
-import net.day.chopped.registry.groups.ChoppedTags;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -17,7 +12,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SlotAccess;
@@ -28,9 +22,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.tooltip.BundleTooltip;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -40,12 +32,11 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.stream.Stream;
 
 @Mod.EventBusSubscriber(modid = Chopped.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ChoppedBundleItem extends ChoppedItem {
-    private static int maxWeight = 64;
+    protected static int maxWeight = 64;
     private static TagKey<?> allowedTag;
     private static final int BAR_COLOR = Mth.color(1.0F, 0.843F, 0.0F);
 
@@ -121,31 +112,6 @@ public class ChoppedBundleItem extends ChoppedItem {
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
     }
 
-    @Override
-    public InteractionResult useOn(UseOnContext pContext) {
-        Player player = pContext.getPlayer();
-        Level level = pContext.getLevel();
-        BlockPos blockPos = pContext.getClickedPos();
-        BlockState state = pContext.getLevel().getBlockState(blockPos);
-
-        if (allowedTag == ChoppedTags.Items.FRUIT_BASKET_ALLOWED && state.getProperties().contains(FruitBearingLeavesBlock.FRUIT_BEARING)) {
-            if (state.getValue(FruitBearingLeavesBlock.FRUIT_BEARING)) {
-                ItemStack yieldStack = new ItemStack(getCultivarTypeAndItems(state)[state.getValue(FruitBearingLeavesBlock.CULTIVAR)], new Random().nextInt(3) + 1);
-                int i = add(pContext.getItemInHand(), yieldStack);
-                yieldStack.shrink(i);
-                state.getBlock().popResourceFromFace(level, blockPos, pContext.getClickedFace(), yieldStack);
-                level.setBlockAndUpdate(blockPos, state.setValue(FruitBearingLeavesBlock.FRUIT_BEARING, false));
-                if (getContentWeight(pContext.getItemInHand()) == maxWeight) {
-                    return InteractionResult.sidedSuccess(level.isClientSide());
-                }
-                this.playInsertSound(pContext.getPlayer());
-                return InteractionResult.PASS;
-            }
-        }
-
-        return InteractionResult.PASS;
-    }
-
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void pickupAllowedItem(EntityItemPickupEvent event) {
         if (event.getItem().getItem().getTags().anyMatch(allowedTag::equals)) {
@@ -165,14 +131,6 @@ public class ChoppedBundleItem extends ChoppedItem {
         }
     }
 
-    private Item[] getCultivarTypeAndItems(BlockState blockState) {
-        if (blockState.getBlock() == ChoppedBlocks.BLOCKS_APPLE_LEAVES.get()) {
-            return CultivarType.APPLE;
-        } else {
-            return CultivarType.ORANGE;
-        }
-    }
-
     @Override
     public boolean isBarVisible(ItemStack pStack) {
         return getContentWeight(pStack) > 0;
@@ -188,7 +146,7 @@ public class ChoppedBundleItem extends ChoppedItem {
         return BAR_COLOR;
     }
 
-    private static int add(ItemStack pBundleStack, ItemStack pInsertedStack) {
+    protected static int add(ItemStack pBundleStack, ItemStack pInsertedStack) {
         if (!pInsertedStack.isEmpty() && pInsertedStack.getItem().canFitInsideContainerItems()) {
             CompoundTag compoundtag = pBundleStack.getOrCreateTag();
             if (!compoundtag.contains("Items")) {
@@ -263,7 +221,7 @@ public class ChoppedBundleItem extends ChoppedItem {
         return 64 / pStack.getMaxStackSize();
     }
 
-    private static int getContentWeight(ItemStack pStack) {
+    protected static int getContentWeight(ItemStack pStack) {
         return getContents(pStack).mapToInt((stack) -> {
             return getWeight(stack) * stack.getCount();
         }).sum();
@@ -342,7 +300,7 @@ public class ChoppedBundleItem extends ChoppedItem {
         pEntity.playSound(SoundEvents.BUNDLE_REMOVE_ONE, 0.8F, 0.8F + pEntity.getLevel().getRandom().nextFloat() * 0.4F);
     }
 
-    private void playInsertSound(Entity pEntity) {
+    protected void playInsertSound(Entity pEntity) {
         pEntity.playSound(SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + pEntity.getLevel().getRandom().nextFloat() * 0.4F);
     }
 

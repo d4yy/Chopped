@@ -50,10 +50,18 @@ public abstract class FruitBearingLeavesBlock extends LeavesBlock {
         this.bonusChance = bonusChance;
     }
 
-    protected abstract Item[] getCultivarItems();
+    public abstract Item[] getCultivarItems();
 
-    protected Item[] getBonusItems() {
+    public Item[] getBonusItems() {
         return new Item[0];
+    }
+
+    public Float getBonusChance() {
+        return bonusChance;
+    }
+
+    public int getBonusAmount() {
+        return bonusAmount;
     }
 
     private int fertilityRandomiser() {

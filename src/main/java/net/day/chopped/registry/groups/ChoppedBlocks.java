@@ -76,7 +76,7 @@ public class ChoppedBlocks {
     public static final RegistryObject<Block> BLOCKS_CITRUS_PLANKS = register("citrus_planks", () -> new ChoppedBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> BLOCKS_ORANGE_LEAVES = register("orange_leaves", () -> new FruitBearingLeavesBlock(0, 0.0F) {
         @Override
-        protected Item[] getCultivarItems() {
+        public Item[] getCultivarItems() {
             return CultivarType.ORANGE;
         }
     });
