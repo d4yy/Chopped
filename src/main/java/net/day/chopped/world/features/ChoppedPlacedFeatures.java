@@ -1,7 +1,6 @@
 package net.day.chopped.world.features;
 
 import net.day.chopped.Chopped;
-
 import net.day.chopped.registry.groups.ChoppedBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -32,27 +31,27 @@ public class ChoppedPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, CHROMIUM_ORE_PLACED, configuredFeatures.getOrThrow(ChoppedConfiguredFeatures.CHROMIUM_ORE), List.of(
-                HeightRangePlacement.of(BiasedToBottomHeight.of(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(30), 1)),
-                BiomeFilter.biome(),
-                InSquarePlacement.spread(),
-                CountPlacement.of(50)
+            HeightRangePlacement.of(BiasedToBottomHeight.of(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(30), 1)),
+            BiomeFilter.biome(),
+            InSquarePlacement.spread(),
+            CountPlacement.of(50)
         ));
         register(context, HIMALAYAN_SALT_ORE_PLACED, configuredFeatures.getOrThrow(ChoppedConfiguredFeatures.HIMALAYAN_SALT_ORE), List.of(
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(200), VerticalAnchor.top()),
-                BiomeFilter.biome(),
-                InSquarePlacement.spread(),
-                CountPlacement.of(250)
+            HeightRangePlacement.uniform(VerticalAnchor.absolute(200), VerticalAnchor.top()),
+            BiomeFilter.biome(),
+            InSquarePlacement.spread(),
+            CountPlacement.of(250)
         ));
 
         register(context, SEA_SALT_DEPOSIT_PLACED, configuredFeatures.getOrThrow(ChoppedConfiguredFeatures.SEA_SALT_DEPOSIT), List.of(
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(32), VerticalAnchor.absolute(64)),
-                BiomeFilter.biome(),
-                InSquarePlacement.spread(),
-                CountPlacement.of(50)
+            HeightRangePlacement.uniform(VerticalAnchor.absolute(32), VerticalAnchor.absolute(64)),
+            BiomeFilter.biome(),
+            InSquarePlacement.spread(),
+            CountPlacement.of(50)
         ));
 
         register(context, APPLE_TREE_RED_DELICIOUS_PLACED, configuredFeatures.getOrThrow(ChoppedConfiguredFeatures.APPLE_TREE_RED_DELICIOUS),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01F, 1), ChoppedBlocks.BLOCKS_APPLE_SAPLING.get())
+            VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01F, 1), ChoppedBlocks.BLOCKS_APPLE_SAPLING.get())
         );
         register(context, APPLE_TREE_GRANNY_SMITH_PLACED, configuredFeatures.getOrThrow(ChoppedConfiguredFeatures.APPLE_TREE_GRANNY_SMITH),
             VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01F, 1), ChoppedBlocks.BLOCKS_APPLE_SAPLING.get())

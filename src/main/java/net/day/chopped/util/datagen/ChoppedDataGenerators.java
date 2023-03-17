@@ -25,7 +25,7 @@ public class ChoppedDataGenerators {
         BlockTagsProvider blockTagsProvider = new ChoppedBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
 
         generator.addProvider(true, blockTagsProvider);
-        generator.addProvider(true, new ChoppedItemTagsProvider(packOutput, lookupProvider, blockTagsProvider, existingFileHelper));
+        generator.addProvider(true, new ChoppedItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
         generator.addProvider(true, new ChoppedRecipeProvider(packOutput));
         generator.addProvider(true, ChoppedLootTableProvider.create(packOutput));
         generator.addProvider(true, new ChoppedItemModelProvider(packOutput, existingFileHelper));

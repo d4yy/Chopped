@@ -19,7 +19,7 @@ public class ChoppedTabs {
         TAB_MAIN = event.registerCreativeModeTab(new ResourceLocation(Chopped.MOD_ID, "main_tab"),builder -> builder
                 .icon(() -> new ItemStack(Items.SMOKER))
                 .title(Component.translatable("tabs.chopped.main_tab"))
-                .displayItems((featureFlags, output, hasOp) -> {
+                .displayItems((featureFlags, output) -> {
                     for(RegistryObject<Item> i : ChoppedRegistry.ITEMS.getEntries()) {
                         output.accept(i.get());
                     }

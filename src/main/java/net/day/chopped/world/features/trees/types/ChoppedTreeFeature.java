@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.material.Material;
 
 import java.util.Collection;
@@ -25,17 +26,17 @@ public class ChoppedTreeFeature<FC extends ChoppedTreeConfiguration> extends Tre
         super((Codec) codec);
     }
 
-    public boolean placeLeaves(LevelAccessor level, BlockPos pos, BiConsumer<BlockPos, BlockState> leaves, FC config) {
+    public boolean placeLeaves(LevelAccessor level, BlockPos pos, FoliagePlacer.FoliageSetter leaves, FC config) {
         if (canReplace(level, pos)) {
-            leaves.accept(pos, config.foliageProvider.getState(level.getRandom(), pos));
+            leaves.set(pos, config.foliageProvider.getState(level.getRandom(), pos));
             return true;
         }
         return false;
     }
 
-    public boolean placeAltLeaves(LevelAccessor level, BlockPos pos, BiConsumer<BlockPos, BlockState> leaves, FC config) {
+    public boolean placeAltLeaves(LevelAccessor level, BlockPos pos, FoliagePlacer.FoliageSetter leaves, FC config) {
         if (canReplace(level, pos)) {
-            leaves.accept(pos, config.altFoliageProvider.getState(level.getRandom(), pos));
+            leaves.set(pos, config.altFoliageProvider.getState(level.getRandom(), pos));
             return true;
         }
         return false;

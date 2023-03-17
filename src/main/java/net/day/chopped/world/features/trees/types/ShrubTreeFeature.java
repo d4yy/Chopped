@@ -9,6 +9,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,7 @@ public class ShrubTreeFeature extends ChoppedTreeFeature<ShrubTreeConfiguration>
     }
 
     @Override //AT
-    protected boolean doPlace(WorldGenLevel world, RandomSource random, BlockPos startPos, BiConsumer<BlockPos, BlockState> roots, BiConsumer<BlockPos, BlockState> logs, BiConsumer<BlockPos, BlockState> leaves, TreeConfiguration configBase) {
+    protected boolean doPlace(WorldGenLevel world, RandomSource random, BlockPos startPos, BiConsumer<BlockPos, BlockState> roots, BiConsumer<BlockPos, BlockState> logs, FoliagePlacer.FoliageSetter leaves, TreeConfiguration configBase) {
         ShrubTreeConfiguration config = (ShrubTreeConfiguration) configBase;
 
         while (startPos.getY() > 1 && canReplace(world, startPos.below())) {
@@ -56,7 +57,7 @@ public class ShrubTreeFeature extends ChoppedTreeFeature<ShrubTreeConfiguration>
         return true;
     }
 
-    public void generateLeafLayer(LevelAccessor world, BlockPos pos, int radius, BiConsumer<BlockPos, BlockState> leaves, ShrubTreeConfiguration config) {
+    public void generateLeafLayer(LevelAccessor world, BlockPos pos, int radius, FoliagePlacer.FoliageSetter leaves, ShrubTreeConfiguration config) {
         int innerDensity = 0;
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dy = -radius; dy <= radius; dy++) {
