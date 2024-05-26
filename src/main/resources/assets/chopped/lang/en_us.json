@@ -3,21 +3,22 @@
   "tabs.chopped.main_tab": "Chopped",
 
   "###CASSETTE###": "--------------------------------------",
-  "item.chopped.cassette_what_it_do": "Four-Track Cassette",
+  "item.chopped.cassette_what_it_do": "Cassette",
   "item.chopped.cassette_what_it_do.desc": "e-dubble - What It Do",
-  "item.chopped.cassette_be_a_king": "Four-Track Cassette",
+  "item.chopped.cassette_be_a_king": "Cassette",
   "item.chopped.cassette_be_a_king.desc": "e-dubble - Be A King",
-  "item.chopped.cassette_let_me_ohh": "Four-Track Cassette",
+  "item.chopped.cassette_let_me_ohh": "Cassette",
   "item.chopped.cassette_let_me_ohh.desc": "e-dubble - Let Me Ohh",
-  "item.chopped.cassette_drinking_with_my_headphones_on": "Four-Track Cassette",
+  "item.chopped.cassette_drinking_with_my_headphones_on": "Cassette",
   "item.chopped.cassette_drinking_with_my_headphones_on.desc": "e-dubble - Drinking With My Headphones On",
-  "item.chopped.cassette_big_ships": "Four-Track Cassette",
+  "item.chopped.cassette_big_ships": "Cassette",
   "item.chopped.cassette_big_ships.desc": "e-dubble - Big Ships",
 
   "###ITEMS###": "--------------------------------------",
   "item.chopped.chromium_ingot": "Chromium Ingot",
   "item.chopped.raw_chromium": "Raw Chromium",
   "item.chopped.fruit_basket": "Fruit Basket",
+  "item.chopped.sea_salt_pinch": "Sea Salt Pinch",
 
   "###BLOCKS###": "--------------------------------------",
   "block.chopped.chromium_ore": "Chromium Ore",
@@ -26,9 +27,6 @@
   "block.chopped.chromium_block.tooltip": "\u00A77Can be used as a beacon base",
   "block.chopped.tinted_chromium_block": "Tinted Block of Chromium",
   "block.chopped.stainless_steel_block": "Block of Stainless Steel",
-  "block.chopped.sea_salt_block": "Block of Sea Salt",
-  "block.chopped.himalayan_salt_block": "Block of Himalayan Salt",
-
-  "###VANILLA OVERRIDES###": "--------------------------------------",
-  "item.minecraft.apple": "Red Delicious Apple"
+  "block.chopped.sea_salt": "Sea Salt",
+  "block.chopped.himalayan_salt": "Himalayan Salt"
 }
