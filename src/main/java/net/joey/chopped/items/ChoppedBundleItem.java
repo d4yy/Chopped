@@ -24,6 +24,7 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.math.Fraction;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -121,7 +122,7 @@ public class ChoppedBundleItem extends Item {
     }
 
     @Override
-    public boolean isBarVisible(ItemStack pStack) {
+    public boolean isBarVisible(@NotNull ItemStack pStack) {
         ChoppedBundleContents bundlecontents = pStack.getOrDefault(ChoppedDataComponents.CHOPPED_BUNDLE_CONTENTS.get(), ChoppedBundleContents.EMPTY);
         return bundlecontents.weight().compareTo(Fraction.ZERO) > 0;
     }
@@ -162,7 +163,7 @@ public class ChoppedBundleItem extends Item {
     public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         ChoppedBundleContents bundlecontents = pStack.get(ChoppedDataComponents.CHOPPED_BUNDLE_CONTENTS.get());
         if (bundlecontents != null) {
-            int i = Mth.mulAndTruncate(bundlecontents.weight(), 64 * 7);
+            int i = Mth.mulAndTruncate(bundlecontents.weight(), 64);
             pTooltipComponents.add(Component.translatable("item.minecraft.bundle.fullness", i, 64 * maxStacks).withStyle(ChatFormatting.GRAY));
         }
     }
